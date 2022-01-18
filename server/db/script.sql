@@ -1,35 +1,65 @@
-drop table Book;
-drop table Author;
-drop table Type_of_book;
-drop table Book_author;
-
-CREATE TABLE Book (
-	id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	title TEXT,
-	edition INTEGER DEFAULT 1 NOT NULL,
-	year_of_first_edition INTEGER,
-    type_of_book_id INTEGER,
-    isbn TEXT
+Create table Dostawa(
+	id INTEGER PRIMARY KEY,
+	dostawa_id INTEGER NOT NULL,
+	pracownik_id INTEGER NOT NULL
 );
 
-CREATE TABLE Author (
-	id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	name TEXT NOT NULL,
-	year_of_birth INTEGER
+Create table Faktura(
+	id INTEGER PRIMARY KEY,
+	dane_faktury Text,
+	zamowienie_id INTEGER not null
 );
 
-ALTER TABLE Author ADD surname TEXT NOT NULL;
-ALTER TABLE Author ADD description TEXT;
 
-
-CREATE TABLE Book_author (
-	id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	book_id INTEGER NOT NULL,
-	author_id INTEGER NOT NULL
+Create Table Klient (
+	id INTEGER PRIMARY KEY,
+	nazwa_firmy Text not null,
+	nip Integer not null,
+	email text not null,
+	telefon text not null,
+	adres text not null
 );
 
-CREATE TABLE type_of_book (
-	id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-	name TEXT NOT NULL,
-	description TEXT
+Create table Pracownik (
+	id integer PRIMARY key,
+	imie text not null,
+	nazwisko text not null,
+	login text not null,
+	haslo text not null,
+	stanowisko_id text not null
 );
+
+Create table Produkt (
+	id integer PRIMARY key,
+	nazwa text not null,
+	ilosc integer not null,
+	cena REAL not null
+
+);
+
+Create table Produkt_dostawa (
+	id integer PRIMARY key,
+	dostawa_id integer,
+	produkt_id integer,
+	ilosc Integer
+);
+
+
+Create table Zamowienie (
+	id integer PRIMARY key,
+	data_zalozenia text not null,
+	pracownik_id integer ,
+	klient_id integer ,
+	data_realizacji text not null,
+	stan integer 
+);
+
+create table Zamowienie_produkt (
+	id integer not null,
+	produkt_id integer not null,
+	ilosc integer not null,
+	zamowienie_id integer not null
+) ;
+
+--wywalenie kategorii i stanowiska pracowników
+
