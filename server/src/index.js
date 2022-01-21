@@ -1,14 +1,20 @@
 const express = require("express")
 const app = express()
 const port = 3000 || process.env.port
+const bodyParser = require('body-parser');
 
-const przedmiotRouter = require('./routes/przedmiot')
+
+const przedmiotRouter = require('./routes/produktRoute')
 
 app.get('/', (req,res)=>{
     res.json({message:'work!'})
 })
 
-app.use('/przedmiot',przedmiotRouter)
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
+app.use('/produkt',przedmiotRouter)
+
 
 app.listen(port, ()=>{
 console.log(`example app listening at http://localhost:${port}`);});
