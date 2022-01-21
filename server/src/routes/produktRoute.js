@@ -19,7 +19,14 @@ router.get('/getAll', function(req,res,next){
 
 router.post('/add',function(req,res,next){
     console.log(req.body)
-    res.send('')
+    try{
+        produktService.insert(req.body)
+        res.json({status:'done'})
+    }
+    catch(err){
+        res.json({status:'failed'})
+        console.error("Błąd w routingu, w insercie: ",err)
+        }
 })
 
 module.exports = router
