@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const produktService = require('../services/produktService');
-
+const baseService = require("../services/baseService")
 
 router.get('/', function(req,res,next){
     res.json({message:"healthy"})
@@ -17,43 +17,12 @@ router.get('/getAll', function(req,res,next){
     }
 });
 
-router.post('/add',function(req,res,next){
-    console.log(req.body)
-    try{
-        produktService.insert(req.body)
-        res.json({status:'done'})
-    }
-    catch(err){
-        res.json({status:'failed'})
-        console.error("Błąd w routingu, w insercie: ",err)
-        }
-})
+router.post('/add',baseService.addTemplate(produktService))
 
 // todo generyzacja tego by był podawany tylko service jako parametr 
-router.get('/delete',function(req,res,next){
-    var id = req.body.id
-    
-    id = parseInt(id)
-    
-    if(id == undefined || id !== id){
-        console.log("Unable to delete! Wrong request!")        
-        
-        res.json({status:"Error", description: "Provided not a number"})
-    }
-    else{
-        console.log("deleting id:", id)
-        try{
+router.get('/delete',baseService.delTemplate(produktService))
+// console.log(delTemplate(NaN))
 
-            if(produktService.del(id)){
-                res.json({status:"Done"})
-            }
-            
-        }catch(err){
-            res.json({status:`SQL Error: ${err}`})
-        }
-        
-    }
-})
 
 router.get("/update", function(req,res,next){
     ob = req.body

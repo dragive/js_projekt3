@@ -1,9 +1,10 @@
 const db = require('./db')
 const config = require('../config')
+const base = require('./baseService')
 
-function getMultiple(page=1){
-    const offset = (page - 1) * config.listPerPage;
-    const data = db.query(`Select * from Produkt`,[]); //fixme dodanie limitów do pages
+function getMultiple(page=1,perPage = config.listPerPage){
+    const offset = (page - 1) * perPage;
+    const data = db.query(`Select * from Produkt limit ?, ?;`,[offset,perPage]);
     const meta = {page}
 
     return {
@@ -29,19 +30,7 @@ function insert(ob){
 }
 
 function del(id){
-    var parsedId = parseInt(id)
-    try{
-        if(parsedId != undefined && parseInt === parseInt){
-        db.queryNoResult("delete from Produkt where id = ?",[parsedId])
-        }else{
-            throw "db.service: Not a number!"
-        }
-        return true
-    }
-    catch(err){
-        console.error("Deleteing error: ",err)
-        throw err
-    }
+    return base.del(id,"Produkt")
 }
 
 function update(ob){
@@ -54,7 +43,7 @@ function update(ob){
 }
 
 function checkObject(ob){
-
+    //todo
 }
 
 module.exports = {
