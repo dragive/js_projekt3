@@ -44,8 +44,22 @@ function del(id){
     }
 }
 
+function update(ob){
+    try{
+        checkObject(ob)
+        db.queryNoResult(`update Produkt set nazwa = ?, ilosc = ?, cena = ? where id = ? `,[ob.nazwa, ob.ilosc,ob.cena,ob.id])
+    }catch(err){
+        console.log("Service Update Err: ",err)
+    }
+}
+
+function checkObject(ob){
+
+}
+
 module.exports = {
     getMultiple,
     insert,
-    del
+    del,
+    update
 }

@@ -55,4 +55,16 @@ router.get('/delete',function(req,res,next){
     }
 })
 
+router.get("/update", function(req,res,next){
+    ob = req.body
+    try{
+        produktService.update(ob)
+
+        res.json({status:"Done"})
+    }
+    catch(err){
+        res.json({status:"Error", description:err})
+    }
+})
+
 module.exports = router
