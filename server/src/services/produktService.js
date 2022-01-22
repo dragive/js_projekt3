@@ -28,8 +28,24 @@ function insert(ob){
     }
 }
 
+function del(id){
+    var parsedId = parseInt(id)
+    try{
+        if(parsedId != undefined && parseInt === parseInt){
+        db.queryNoResult("delete from Produkt where id = ?",[parsedId])
+        }else{
+            throw "db.service: Not a number!"
+        }
+        return true
+    }
+    catch(err){
+        console.error("Deleteing error: ",err)
+        throw err
+    }
+}
 
 module.exports = {
     getMultiple,
-    insert
+    insert,
+    del
 }

@@ -29,4 +29,29 @@ router.post('/add',function(req,res,next){
         }
 })
 
+router.get('/delete',function(req,res,next){
+    var id = req.body.id
+    
+    id = parseInt(id)
+    
+    if(id == undefined || id !== id){
+        console.log("Unable to delete! Wrong request!")        
+        
+        res.json({status:"Error", description: "Provided not a number"})
+    }
+    else{
+        console.log("deleting id:", id)
+        try{
+
+            if(produktService.del(id)){
+                res.json({status:"Done"})
+            }
+            
+        }catch(err){
+            res.json({status:`SQL Error: ${err}`})
+        }
+        
+    }
+})
+
 module.exports = router
