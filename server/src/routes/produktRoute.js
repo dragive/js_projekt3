@@ -29,6 +29,7 @@ router.post('/add',function(req,res,next){
         }
 })
 
+// todo generyzacja tego by był podawany tylko service jako parametr 
 router.get('/delete',function(req,res,next){
     var id = req.body.id
     
