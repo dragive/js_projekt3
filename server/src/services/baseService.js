@@ -62,8 +62,38 @@ function addTemplate(service){
     }
 }
 
+
+function getAllTemplate(service){
+    return function(req,res,next){
+        try{
+            res.json(service.getMultiple(req.query.page));
+        }
+        catch(err){
+            console.error(err.message)
+            next(err)
+        }
+    }
+}
+
+
+function updateTemplate(service){
+    return function(req,res,next){
+        ob = req.body
+        try{
+            service.update(ob)
+
+            res.json({status:"Done"})
+        }
+        catch(err){
+            res.json({status:"Error", description:err})
+        }
+    }
+}
+
 module.exports = {
     del: delRouteTemplate,
     delTemplate,
-    addTemplate
+    addTemplate,
+    getAllTemplate,
+    updateTemplate
 }

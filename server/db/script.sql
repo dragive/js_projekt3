@@ -1,18 +1,18 @@
 Create table Dostawa(
-	id INTEGER PRIMARY KEY,
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	dostawa_id INTEGER NOT NULL,
 	pracownik_id INTEGER NOT NULL
 );
 
 Create table Faktura(
-	id INTEGER PRIMARY KEY,
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	dane_faktury Text,
 	zamowienie_id INTEGER not null
 );
 
 
 Create Table Klient (
-	id INTEGER PRIMARY KEY,
+	id INTEGER PRIMARY KEY AUTOINCREMENT,`
 	nazwa_firmy Text not null,
 	nip Integer not null,
 	email text not null,
@@ -21,7 +21,7 @@ Create Table Klient (
 );
 
 Create table Pracownik (
-	id integer PRIMARY key,
+	id integer PRIMARY KEY AUTOINCREMENT,
 	imie text not null,
 	nazwisko text not null,
 	login text not null,
@@ -30,7 +30,7 @@ Create table Pracownik (
 );
 
 Create table Produkt (
-	id integer PRIMARY key,
+	id integer PRIMARY KEY AUTOINCREMENT,
 	nazwa text not null,
 	ilosc integer not null,
 	cena REAL not null
@@ -38,7 +38,7 @@ Create table Produkt (
 );
 
 Create table Produkt_dostawa (
-	id integer PRIMARY key,
+	id integer PRIMARY KEY AUTOINCREMENT,
 	dostawa_id integer,
 	produkt_id integer,
 	ilosc Integer
@@ -46,7 +46,7 @@ Create table Produkt_dostawa (
 
 
 Create table Zamowienie (
-	id integer PRIMARY key,
+	id integer PRIMARY KEY AUTOINCREMENT,
 	data_zalozenia text not null,
 	pracownik_id integer ,
 	klient_id integer ,
