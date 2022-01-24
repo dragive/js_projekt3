@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const tableSpecifiedService = require('../services/produktService');
+const tableSpecifiedService = require('../services/zamowienieService');
 const baseService = require("../services/baseService")
 
 router.get('/', function(req,res,next){
