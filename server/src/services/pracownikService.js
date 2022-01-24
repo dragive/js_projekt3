@@ -32,7 +32,7 @@ function del(id){
 function update(ob){
     try{
         checkObject(ob)
-        db.queryNoResult(`update Pracownik set imie=?,nazwisko=?,login=?,haslo=?,stanowisko_id=? where id = ? `,[ob.imie, ob.nazwisko,ob.login,ob.haslo,ob.stanowiskoId])
+        db.queryNoResult(`update Pracownik set imie=?,nazwisko=?,login=?,haslo=?,stanowisko_id=? where id = ? `,[ob.imie, ob.nazwisko,ob.login,ob.haslo,ob.stanowiskoId,ob.id])
     }catch(err){
         console.log("Service Update Err: ",err)
     }

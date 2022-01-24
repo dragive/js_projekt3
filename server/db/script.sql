@@ -12,7 +12,7 @@ Create table Faktura(
 
 
 Create Table Klient (
-	id INTEGER PRIMARY KEY AUTOINCREMENT,`
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	nazwa_firmy Text not null,
 	nip Integer not null,
 	email text not null,
@@ -55,7 +55,7 @@ Create table Zamowienie (
 );
 
 create table Zamowienie_produkt (
-	id integer not null,
+	id integer PRIMARY KEY,
 	produkt_id integer not null,
 	ilosc integer not null,
 	zamowienie_id integer not null

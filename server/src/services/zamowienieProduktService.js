@@ -32,7 +32,7 @@ function del(id){
 function update(ob){
     try{
         checkObject(ob)
-        db.queryNoResult(`update Zamowienie_produkt set produkt_id=?,ilosc=?,zamowienie_id=? where id = ? `,[ob.produktId, ob.ilosc,ob.zamowienieId])
+        db.queryNoResult(`update Zamowienie_produkt set produkt_id=?,ilosc=?,zamowienie_id=? where id = ? `,[ob.produktId, ob.ilosc,ob.zamowienieId,ob.id])
     }catch(err){
         console.log("Service Update Err: ",err)
     }

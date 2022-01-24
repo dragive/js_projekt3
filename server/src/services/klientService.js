@@ -16,8 +16,8 @@ function getMultiple(page=1,perPage = config.listPerPage){
 function insert(ob){
        
     try{
-        console.log(`query: insert into Klient (nazwa_firmy,nip,emial,telefon,adres) values ('${ob.nazwaFirmy}',${ob.nip},'${ob.email}','${telefon}','${adres}');`)
-        db.queryNoResult(`insert into Klient (nazwa_firmy,nip,emial,telefon,adres) values ('${ob.nazwaFirmy}',${ob.nip},'${ob.email}','${telefon}','${adres}');`)
+        console.log(`query: insert into Klient (nazwa_firmy,nip,email,telefon,adres) values ('${ob.nazwaFirmy}',${ob.nip},'${ob.email}','${ob.telefon}','${ob.adres}');`)
+        db.queryNoResult(`insert into Klient (nazwa_firmy,nip,email,telefon,adres) values ('${ob.nazwaFirmy}',${ob.nip},'${ob.email}','${ob.telefon}','${ob.adres}');`)
     }
     catch(err){
         console.error("Błąd przy insercie",err)
@@ -32,7 +32,7 @@ function del(id){
 function update(ob){
     try{
         checkObject(ob)
-        db.queryNoResult(`update Klient set nazwa_firmy=?,nip=?,emial=?,telefon=?,adres=? where id = ? `,[ob.nazwaFirmy, ob.nip,ob.email,ob.telefon,ob.adres])
+        db.queryNoResult(`update Klient set nazwa_firmy=?,nip=?,email=?,telefon=?,adres=? where id = ? `,[ob.nazwaFirmy, ob.nip,ob.email,ob.telefon,ob.adres,ob.id])
     }catch(err){
         console.log("Service Update Err: ",err)
     }

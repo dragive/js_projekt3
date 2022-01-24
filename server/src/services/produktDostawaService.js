@@ -16,8 +16,8 @@ function getMultiple(page=1,perPage = config.listPerPage){
 function insert(ob){
        
     try{
-        console.log(`query: insert into Produkt_dostawa (dostawa_id,produkt_id,pracownik_id) values (${ob.dostawaId},${ob.produkt_id},${ob.pracownik_id});`)
-        db.queryNoResult(`insert into Produkt_dostawa (dostawa_id,produkt_id,pracownik_id) values (${ob.dostawaId},${ob.produkt_id},${ob.pracownik_id});`)
+        console.log(`query: insert into Produkt_dostawa (dostawa_id,produkt_id,ilosc) values (${ob.dostawaId},${ob.produktId},${ob.ilosc});`)
+        db.queryNoResult(`insert into Produkt_dostawa (dostawa_id,produkt_id,ilosc) values (${ob.dostawaId},${ob.produktId},${ob.ilosc});`)
     }
     catch(err){
         console.error("Błąd przy insercie",err)
@@ -32,7 +32,7 @@ function del(id){
 function update(ob){
     try{
         checkObject(ob)
-        db.queryNoResult(`update Produkt_dostawa set dostawa_id=?,produkt_id=?,pracownik_id=? where id = ? `,[ob.dostawaId, ob.produkt_id,ob.pracownik_id])
+        db.queryNoResult(`update Produkt_dostawa set dostawa_id=?,produkt_id=?,ilosc=? where id = ? `,[ob.dostawaId, ob.produktId,ob.ilosc,ob.id])
     }catch(err){
         console.log("Service Update Err: ",err)
     }

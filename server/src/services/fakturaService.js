@@ -19,8 +19,8 @@ function insert(ob){
     const zamowienieId = ob.zamowienieId
     
     try{
-        console.log(`query: insert into Faktura (dane_faktury,zamowienie_id) values (${daneFaktury},${zamowienieId});`)
-        db.queryNoResult(`insert into Faktura (dane_faktury,zamowienie_id) values (${daneFaktury},${zamowienieId});`)
+        console.log(`query: insert into Faktura (dane_faktury,zamowienie_id) values ('${daneFaktury}',${zamowienieId});`)
+        db.queryNoResult(`insert into Faktura (dane_faktury,zamowienie_id) values ('${daneFaktury}',${zamowienieId});`)
     }
     catch(err){
         console.error("Błąd przy insercie",err)
