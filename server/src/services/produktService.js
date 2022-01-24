@@ -3,6 +3,9 @@ const config = require('../config')
 const base = require('./baseService')
 
 function getMultiple(page=1,perPage = config.listPerPage){
+    if(perPage !== perPage || perPage ==undefined){
+        perPage = config.listPerPage
+    }
     const offset = (page - 1) * perPage;
     const data = db.query(`Select * from Produkt limit ?, ?;`,[offset,perPage]);
     const meta = {page}

@@ -66,7 +66,7 @@ function addTemplate(service){
 function getAllTemplate(service){
     return function(req,res,next){
         try{
-            res.json(service.getMultiple(req.query.page));
+            res.json(service.getMultiple(req.query.page,req.query.itemsPerPage));
         }
         catch(err){
             console.error(err.message)
