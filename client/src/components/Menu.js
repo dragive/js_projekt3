@@ -1,20 +1,14 @@
 import React from "react";
 import './Components.css';
+import { useNavigate } from 'react-router-dom';
 import Products from "./Products";
 
-class Menu extends React.Component{
-
-
-    clickLogOut = () => {
-        console.log("aaaa");
-        return (<Products />);
-    }
-
-    render(){
+function Menu(){
+    //const navigate = useNavigate();
     //tu podpiąć imię i nazwisko użytkownika zalogowanego
     let name = "Jan Nowak";
         return(
-            <div class="mainRamka">
+            <div class="menuRamka">
                 <div class="nazwaRamka">
                     <div class="tekstNazwaRamka">Menu</div>
                     <div class="margines">
@@ -44,14 +38,13 @@ class Menu extends React.Component{
                                 <br></br>
                             </tr>
                             <tr> 
-                                <td></td><td><button onClick="return (<Products />)" class="przyciskFunkcyjny">&lt;Wyloguj&gt;</button> </td>
+                                <td></td><td><button  class="przyciskFunkcyjny">&lt;Wyloguj&gt;</button> </td>
                             </tr>
                         </table>
                     </div>
                 </div>
             </div>
         )
-    }
 }
 
 export default Menu;

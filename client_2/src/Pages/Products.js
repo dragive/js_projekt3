@@ -2,7 +2,28 @@ import React from "react";
 import './Components.css';
 import { BrowserRouter as useNavigate, Link  } from "react-router-dom";
 
+
+document.getElementById('get-produkts').addEventListener('click', getAjax);
+var jsonResponse
+function getAjax(){
+    console.log('aaa');
+    const xhr = new XMLHttpRequest();
+    console.log(xhr)
+    xhr.onLoad = () => {
+        if(xhr.status === 200){
+            document.getElementById('response').textContent = xhr.responseText;            }
+    }
+
+    xhr.open('GET', 'http://localhost:3000/produkt/getAll', true);
+    xhr.send();
+    jsonResponse = JSON.parse(this.responseText);
+    console.log(jsonResponse);
+}
+
+
+
 function Products(){
+
         return(
                 <div class="produktyRamka">
                     <div class="nazwaRamka">
@@ -41,7 +62,7 @@ function Products(){
                                             <div class="margines">
                                                 <table class="tabela">
                                                 <tr> 
-                                                    <td>Coś w tabeli</td> <td>Coś w tabeli 2</td> <td>Coś w tabeli 3</td>
+                                                    <td>ID</td> <td>Nazwa</td> <td>Ilość</td> <td>Cena</td>
                                                 </tr>
                                                 <tr> 
                                                     <td>Coś w tabeli</td> <td>Coś w tabeli 2</td> <td>Coś w tabeli 3</td>

@@ -10,7 +10,13 @@ import AddProduct from "./Pages/AddProduct";
 import ModifyProducts from "./Pages/ModifyProducts";
 import DeleteProduct from "./Pages/DeleteProduct";
 
+
+
+
+
+
 function App() {
+
   return (
     <Router>
       <Routes>

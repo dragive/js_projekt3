@@ -28,7 +28,7 @@ class Products extends React.Component{
     let name = "Jan Nowak";
 
         return(
-                <div class="mainRamka">
+                <div class="produktyRamka">
                     <div class="nazwaRamka">
                         <div class="tekstNazwaRamka">Zarządzanie produktami</div>
                         <div class="margines">

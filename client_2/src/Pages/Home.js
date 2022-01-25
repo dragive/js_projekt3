@@ -3,6 +3,7 @@ import './Components.css';
 import { BrowserRouter as useNavigate, Link  } from "react-router-dom";
 
 function Home(){
+
     let name = "Jan Nowak";
         return(
             <div class="menuRamka">
@@ -17,7 +18,7 @@ function Home(){
                                 <br></br>
                             </tr>
                             <tr>  
-                                <td><Link to="/products" class="przycisk"> Produkty </Link> </td> <td></td>
+                                <td><Link to="/products" class="przycisk" id="get-produkts"> Produkty </Link> </td> <td></td>
                             </tr>
                             <tr> 
                                 <td><Link to="/clients" class="przycisk"> Klienci </Link> </td> <td></td>

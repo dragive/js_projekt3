@@ -1,9 +1,20 @@
-.mainRamka {
+.menuRamka {
     margin-left: auto;
     margin-right: auto;
     position:absolute; 
-    top:25%; left:27%;
+    top:25%; left:40%;
     
+    background-color: #CCCCCC;
+    padding: 8px 8px;
+    box-shadow: 15px 15px 0px #000000;
+}
+.produktyRamka {
+    margin-left: auto;
+    margin-right: auto;
+    position:absolute; 
+    top:15%; left:27%;
+    width: 650px;
+    height: 400px;
     background-color: #CCCCCC;
     padding: 8px 8px;
     box-shadow: 15px 15px 0px #000000;
