@@ -1,33 +1,31 @@
 import React from "react";
 import './Components.css';
 import { BrowserRouter as useNavigate, Link  } from "react-router-dom";
+import axios from 'axios'
 
 
-document.getElementById('get-produkts').addEventListener('click', getAjax);
-var jsonResponse
-function getAjax(){
-    console.log('aaa');
-    const xhr = new XMLHttpRequest();
-    console.log(xhr)
-    xhr.onLoad = () => {
-        if(xhr.status === 200){
-            document.getElementById('response').textContent = xhr.responseText;            }
+
+
+const getTodoItems = async () => {
+    try {
+      const response = await axios.get(`http://192.168.1.191:3001/produkt/getAll`);
+  
+      const todoItems = response.data;
+  
+      console.log(`GET: Here's the list of todos`, todoItems);
+  
+      return todoItems;
+    } catch (errors) {
+      console.error(errors);
     }
-
-    xhr.open('GET', 'http://localhost:3000/produkt/getAll', true);
-    xhr.send();
-    jsonResponse = JSON.parse(this.responseText);
-    console.log(jsonResponse);
-}
-
-
+  };
 
 function Products(){
-
+        console.log(getTodoItems())
         return(
                 <div class="produktyRamka">
                     <div class="nazwaRamka">
-                        <div class="tekstNazwaRamka">Zarządzanie produktami</div>
+                        <div class="tekstNazwaRamka" >Zarządzanie produktami</div>
                         <div class="margines">
                             <table class="tabela">
                                 <tr>
