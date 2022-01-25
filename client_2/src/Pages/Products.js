@@ -3,25 +3,98 @@ import './Components.css';
 import { BrowserRouter as useNavigate, Link  } from "react-router-dom";
 import axios from 'axios'
 
+let dane1 = {id: 1, nazwa:"Jablko", ilosc: 1, cena: 2};
+let dane2 = {id: 2, nazwa:"Gruszka", ilosc: 2, cena: 2};
+let dane = [dane1, dane2]
 
 
 
 const getTodoItems = async () => {
     try {
-      const response = await axios.get(`http://192.168.1.191:3001/produkt/getAll`);
+      const response = await axios.get(`http://localhost:3001/produkt/getAll`);
   
-      const todoItems = response.data;
+      const todoItems =  response.data.data;
   
-      console.log(`GET: Here's the list of todos`, todoItems);
-  
+      //console.log(`GET: Here's the list of todos`, todoItems);
+      //console.log(todoItems);
       return todoItems;
     } catch (errors) {
       console.error(errors);
     }
   };
 
+
+  const tableBody = document.querySelector("#tabela > tbody");
+  console.log(tableBody)
+    dane.forEach((row)=>{
+        const tr = document.createElement("tr");
+          const td1 =  document.createElement("td");
+          td1.textContext = row.id;
+          tr.appendChild(td1);
+          const td2 =  document.createElement("td");
+          td2.textContext = row.nazwa;
+          tr.appendChild(td2);
+          const td3 =  document.createElement("td");
+          td3.textContext = row.ilosc;
+          tr.appendChild(td3);
+          const td4 =  document.createElement("td");
+          td4.textContext = row.cena;
+          tr.appendChild(td4);
+        console.log(row);
+       tableBody.appendChild(tr);
+    })
+
+
+  
+
 function Products(){
-        console.log(getTodoItems())
+        //console.log(getTodoItems());
+        //let dane = Promise.all(getTodoItems());
+        // let dane = {};
+        // getTodoItems().then((a) => {
+        //     //console.log(a.data[1].nazwa);
+        //     dane = a;
+        // });
+        // console.log(dane)
+        //dane =  getTodoItems();
+    
+    
+        // dane.forEach((row)=>{
+        //     const tr = document.createElement("tr");
+
+        //     const td1 =  document.createElement("td");
+        //     td1.textContext = row.id;
+        //     tr.appendChild(td1);
+        //     const td2 =  document.createElement("td");
+        //     td2.textContext = row.nazwa;
+        //     tr.appendChild(td2);
+        //     const td3 =  document.createElement("td");
+        //     td3.textContext = row.ilosc;
+        //     tr.appendChild(td3);
+        //     const td4 =  document.createElement("td");
+        //     td4.textContext = row.cena;
+        //     tr.appendChild(td4);
+        //     console.log(row);
+        // })
+
+
+
+        //console.log(dane);
+
+            
+        // const printData = async () => {
+        //     await getTodoItems().then((a) => {
+        //       console.log(a);
+        //       return(a);
+        //     });
+        //   };
+
+        // console.log(printData().resolve);
+
+
+
+
+
         return(
                 <div class="produktyRamka">
                     <div class="nazwaRamka">
@@ -58,28 +131,11 @@ function Products(){
                                         <div class="nazwaRamka">
                                             <div class="tekstNazwaRamka">Elementy</div>
                                             <div class="margines">
-                                                <table class="tabela">
+                                                <table id="tabela" class="tabela">
                                                 <tr> 
                                                     <td>ID</td> <td>Nazwa</td> <td>Ilość</td> <td>Cena</td>
                                                 </tr>
-                                                <tr> 
-                                                    <td>Coś w tabeli</td> <td>Coś w tabeli 2</td> <td>Coś w tabeli 3</td>
-                                                </tr>
-                                                <tr> 
-                                                    <td>Coś w tabeli</td> <td>Coś w tabeli 2</td> <td>Coś w tabeli 3</td>
-                                                </tr>
-                                                <tr> 
-                                                    <td>Coś w tabeli</td> <td>Coś w tabeli 2</td> <td>Coś w tabeli 3</td>
-                                                </tr>
-                                                <tr> 
-                                                    <td>Coś w tabeli</td> <td>Coś w tabeli 2</td> <td>Coś w tabeli 3</td>
-                                                </tr>
-                                                <tr> 
-                                                    <td>Coś w tabeli</td> <td>Coś w tabeli 2</td> <td>Coś w tabeli 3</td>
-                                                </tr>
-                                                <tr> 
-                                                    <td>Coś w tabeli</td> <td>Coś w tabeli 2</td> <td>Coś w tabeli 3</td>
-                                                </tr>
+                                                <tbody></tbody>
                                                 </table>
                                                 <table>
                                                 <tr> 
