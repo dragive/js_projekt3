@@ -25,6 +25,13 @@ function TextFilter({
     )
    }
 
+function editElement(id){
+    console.log(id)
+}
+function deleteElement(id){
+    console.log(id)
+}
+
 function Products(){
 
 
@@ -76,6 +83,27 @@ function Products(){
         Header: 'cena',
         accessor: 'cena',
     },
+    {
+        Header: 'akcje',
+        accessor: 'actions',
+        disableSortBy: true,
+        Cell: (props) =>{
+            const rowId = props.row.id
+            return (
+                <div>
+                    <span onClick={()=>{editElement(rowId)}}>
+                        <p className="action">EDIT</p>
+
+                    </span>
+
+                    <span onClick={()=>{deleteElement(rowId)}}>
+                            <p className="action">USUN</p>
+
+                        </span>
+                </div>
+            )
+        }
+    },
 ],
     []
    )
@@ -93,8 +121,8 @@ function Products(){
     headerGroups,
     rows,
     prepareRow,
-   } = useTable({ columns, data ,defaultColumn,}, useFilters,useSortBy,)
-
+   } = useTable({ columns, data ,defaultColumn,},useSortBy,)
+//useFilters
         if(error)
         {
             return <div>Error: {error.message}</div>
@@ -151,10 +179,10 @@ function Products(){
                                                         <tr {...headerGroup.getHeaderGroupProps()}>
                                                             {headerGroup.headers.map(column => (
                                                             <th {...column.getHeaderProps(column.getSortByToggleProps())} style = {{/* #DAWID TUTAJ PIERDOLNIJ FORMATKĘ */ color: "#ffffff", }}>{column.render('Header')}
-                                                            {/* <span>
+                                                            <span>
                                                                 {column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}
-                                                            </span> */}
-                                                            <div>{column.canFilter ? column.render('Filter') : null}</div>
+                                                            </span>
+                                                            {/* <div>{column.canFilter ? column.render('Filter') : null}</div> */}
                                                             </th>
                                                             
                                                             ))}
