@@ -59,10 +59,13 @@ function Products(){
         fetch("http://localhost:3001/produkt/getAll")
         .then(res => res.json())
         .then((result)=>{
-
-            setIsLoaded(true);
+            console.log("result")
             console.log(result)
-            setItems(result);
+            setItems(result.data);
+
+
+            console.log("is loaded")
+            setIsLoaded(true);
             console.log(isLoaded)
 
 
@@ -72,13 +75,14 @@ function Products(){
         })
     },[]
 )
-    var itemsCopy = items
-    dane = itemsCopy.data || []
+
+    console.log("123123123")
+    console.log(items)
 
     const data = React.useMemo(() =>
     
-    dane,
-    []
+    items ,
+    [items]
    )
   
    const columns = React.useMemo(
@@ -106,14 +110,15 @@ function Products(){
         disableSortBy: true,
         Cell: (props) =>{
             const rowId = props.row.id
+            const id = props.row.values.id
             return (
                 <div>
-                    <span onClick={()=>{editElement(rowId)}}>
+                    <span onClick={()=>{editElement()}}>
                         <p className="action">EDIT</p>
 
                     </span>
 
-                    <span onClick={()=>{deleteElement(rowId)}}>
+                    <span onClick={()=>{deleteElement(id)}}>
                             <p className="action">USUN</p>
 
                         </span>
@@ -131,6 +136,8 @@ function Products(){
     }),
     []
    )
+
+   console.log("useTable")
 
    const {
     getTableProps,
@@ -182,7 +189,7 @@ function Products(){
                                     </tr>
                                     <tr>
                                         <td>
-                                            &nbsp;
+                                           ....
                                         </td>
                                         <td>
                                             <br></br>
