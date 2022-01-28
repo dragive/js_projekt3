@@ -1,5 +1,5 @@
 import React,  { useEffect, useState} from "react";
-import {useTable, useSortBy} from "react-table" 
+import {useTable, useSortBy, useFilters} from "react-table" 
 import './Components.css';
 import { BrowserRouter as useNavigate, Link  } from "react-router-dom";
 // import axios from 'axios'
@@ -9,7 +9,21 @@ let dane2 = {id: 2, nazwa:"Gruszka", ilosc: 2, cena: 2};
 let dane = [dane1, dane2]
 
 
-
+function TextFilter({
+    column: { filterValue, preFilteredRows, setFilter },
+   }) {
+    const count = preFilteredRows.length
+   
+    return (
+      <input
+        value={filterValue || ''}
+        onChange={e => {
+          setFilter(e.target.value || undefined)
+        }}
+        placeholder={`Search ${count} records...`}
+      />
+    )
+   }
 
 function Products(){
 
@@ -66,13 +80,20 @@ function Products(){
     []
    )
 
+   const defaultColumn = React.useMemo(
+    () => ({
+      Filter: TextFilter,
+    }),
+    []
+   )
+
    const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
     rows,
     prepareRow,
-   } = useTable({ columns, data }, useSortBy,)
+   } = useTable({ columns, data ,defaultColumn,}, useFilters,useSortBy,)
 
         if(error)
         {
@@ -84,43 +105,6 @@ function Products(){
         else if(isLoaded)
         {
             console.log("@"+items)
-
-            // console.log(items)
-            // // var rows = []
-            // var data = items
-            // console.log("data")
-            // console.log(data.data)
-
-
-            // data = data.data
-            // for (let i = 0; i < data.length; i++) {
-            //     const element = data[i];
-
-            //     rows.push(
-                    
-            //         <tr onDoubleClick={()=>{editCell(i)}}>
-                        
-            //             <td class="{asd}">
-            //                 {element.id}
-            //             </td>
-            //             <td>
-            //                 {element.nazwa}
-            //             </td>
-            //             <td>
-            //                 {element.ilosc}
-            //             </td>
-            //             <td>
-            //                 {element.cena}
-            //             </td>
-
-            //             <td>
-                            
-            //             </td>
-            //         </tr>
-            //     )
-                
-            // }
-
             return(
                     <div className="produktyRamka">
                         <div className="nazwaRamka">
@@ -167,10 +151,12 @@ function Products(){
                                                         <tr {...headerGroup.getHeaderGroupProps()}>
                                                             {headerGroup.headers.map(column => (
                                                             <th {...column.getHeaderProps(column.getSortByToggleProps())} style = {{/* #DAWID TUTAJ PIERDOLNIJ FORMATKĘ */ color: "#ffffff", }}>{column.render('Header')}
-                                                            <span>
+                                                            {/* <span>
                                                                 {column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}
-                                                            </span>
+                                                            </span> */}
+                                                            <div>{column.canFilter ? column.render('Filter') : null}</div>
                                                             </th>
+                                                            
                                                             ))}
                                                         </tr>
                                                         ))}
