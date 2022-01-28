@@ -129,8 +129,16 @@ function Products(){
     accessor: 'id',
     },
     {
-    Header: 'nazwa',
-    accessor: 'nazwa',
+        Header: 'nazwa',
+        accessor: 'nazwa',
+    },    
+    {
+        Header: 'ilosc',
+        accessor: 'ilosc',
+    },
+    {
+        Header: 'cena',
+        accessor: 'cena',
     },
 ],
     []
