@@ -1,7 +1,7 @@
 import React from "react";
 import './Components.css';
 import { BrowserRouter as useNavigate, Link  } from "react-router-dom";
-var xh = undefined
+
 function Home(){
 
 
