@@ -2,6 +2,7 @@ import React,  { useEffect, useState} from "react";
 import {useTable, useSortBy, useFilters} from "react-table" 
 import './Components.css';
 import { BrowserRouter as useNavigate, Link  } from "react-router-dom";
+import ProduktService from "../ProduktService"
 // import axios from 'axios'
 
 let dane1 = {id: 1, nazwa:"Jablko", ilosc: 1, cena: 2};
@@ -27,9 +28,23 @@ function TextFilter({
 
 function editElement(id){
     console.log(id)
+    //todo
 }
 function deleteElement(id){
+    console.log("ID:")
     console.log(id)
+    fetch("http://localhost:3001/produkt/delete", {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ id:id }),
+        // mode: 'no-cors'
+    }).then((res) => res.json())
+        .then((data) => {
+            console.log(data)
+            //todo dodanie odswierzenia strony
+        })
+        .catch((err) => console.log(err))
+
 }
 
 function Products(){
@@ -57,6 +72,8 @@ function Products(){
         })
     },[]
 )
+    var itemsCopy = items
+    dane = itemsCopy.data || []
 
     const data = React.useMemo(() =>
     

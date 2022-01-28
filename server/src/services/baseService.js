@@ -23,12 +23,12 @@ function delRouteTemplate(id, table){
 function delTemplate(service){
     return function(req,res,next){
         var id = req.body.id
-        
+        console.log(req.body)
         id = parseInt(id)
         
         if(id == undefined || id !== id){
             console.log("Unable to delete! Wrong request!")        
-            
+            console.log(id)
             res.json({status:"Error", description: "Provided not a number"})
         }
         else{

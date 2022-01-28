@@ -12,7 +12,7 @@ router.get('/getAll', baseService.getAllTemplate(tableSpecifiedService));
 router.post('/add',baseService.addTemplate(tableSpecifiedService))
 
 // todo generyzacja tego by był podawany tylko service jako parametr 
-router.get('/delete',baseService.delTemplate(tableSpecifiedService))
+router.post('/delete',baseService.delTemplate(tableSpecifiedService))
 // console.log(delTemplate(NaN))
 
 
