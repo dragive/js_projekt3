@@ -116,76 +116,23 @@ function Products(){
 
 
     const data = React.useMemo(() =>
-    [
-    {
-    name: 'Kim Parrish',
-    address: '4420 Valley Street, Garnerville, NY 10923',
-    date: '07/11/2020',
-    order: '87349585892118',
-    },
-    {
-    name: 'Michele Castillo',
-    address: '637 Kyle Street, Fullerton, NE 68638',
-    date: '07/11/2020',
-    order: '58418278790810',
-    },
-    {
-    name: 'Eric Ferris',
-    address: '906 Hart Country Lane, Toccoa, GA 30577',
-    date: '07/10/2020',
-    order: '81534454080477',
-    },
-    {
-    name: 'Gloria Noble',
-    address: '2403 Edgewood Avenue, Fresno, CA 93721',
-    date: '07/09/2020',
-    order: '20452221703743',
-    },
-    {
-    name: 'Darren Daniels',
-    address: '882 Hide A Way Road, Anaktuvuk Pass, AK 99721',
-    date: '07/07/2020',
-    order: '22906126785176',
-    },
-    {
-    name: 'Ted McDonald',
-    address: '796 Bryan Avenue, Minneapolis, MN 55406',
-    date: '07/07/2020',
-    order: '87574505851064',
-    },
-    ],
+    
+    dane,
     []
    )
   
    const columns = React.useMemo(
-    () => [
-    {
-    Header: 'User Info',
-    columns: [
-    {
-    Header: 'Name',
-    accessor: 'name',
+    () => 
+    
+    [{
+    Header: 'id',
+    accessor: 'id',
     },
     {
-    Header: 'Address',
-    accessor: 'address',
+    Header: 'nazwa',
+    accessor: 'nazwa',
     },
-    ],
-    },
-    {
-    Header: 'Order Info',
-    columns: [
-    {
-    Header: 'Date',
-    accessor: 'date',
-    },
-    {
-    Header: 'Order #',
-    accessor: 'order',
-    },
-    ],
-    },
-    ],
+],
     []
    )
 
@@ -262,14 +209,29 @@ function Products(){
                                             <div className="nazwaRamka">
                                                 <div className="tekstNazwaRamka">Wyszukiwanie</div>
                                                 <div className="margines">
-                                                    {/* <table className="tabela">
+                                                    <table className="tabela">
                                                         <tbody>
                                                             <tr> 
                                                                 <td><input className="poleDoWpisywania" type="text" name="search"/></td> <td><button className="przyciskFunkcyjny">&lt;Szukaj&gt;</button></td>
                                                             </tr>
                                                         </tbody>
-                                                    </table> */}
-                                                    <table  {...getTableProps()}>
+                                                    </table>
+
+                                                </div>   
+                                            </div>
+                                            </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            &nbsp;
+                                        </td>
+                                        <td>
+                                            <br></br>
+                                            <div className="nazwaRamka">
+                                                <div className="tekstNazwaRamka">Elementy</div>
+                                                <div className="margines">
+                                                    
+                                                <table  {...getTableProps()}>
                                                     <thead>
                                                         {headerGroups.map(headerGroup => (
                                                         <tr {...headerGroup.getHeaderGroupProps()}>
@@ -291,31 +253,6 @@ function Products(){
                                                             )
                                                             })}
                                                             </tbody>
-                                                    </table>
-
-                                                </div>   
-                                            </div>
-                                            </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            &nbsp;
-                                        </td>
-                                        <td>
-                                            <br></br>
-                                            <div className="nazwaRamka">
-                                                <div className="tekstNazwaRamka">Elementy</div>
-                                                <div className="margines">
-                                                    <table id="tabela" className="tabela">
-                                                    <tr> 
-                                                        <td>ID</td> <td>Nazwa</td> <td>Ilość</td> <td>Cena</td>
-                                                    </tr>
-                                                    <tr> 
-                                                        <td><button className="przyciskStrzalka"> &lt; </button> </td> <td><button className="przyciskStrzalka"> &gt; </button> </td>
-                                                    </tr>
-                                                        <tbody className="tbodyList">
-                                                            {/* {rows} */}
-                                                        </tbody>
                                                     </table>
                                                 </div>   
                                             </div>                             
