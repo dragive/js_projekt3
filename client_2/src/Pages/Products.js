@@ -69,7 +69,11 @@ const EditableCell = ({
     React.useEffect(() => {
       setValue(initialValue)
     }, [initialValue])
-  
+    console.log(id)
+    if(id == "id"){
+        return <input value={value} disabled/>
+    }
+    
     return <input value={value} onChange={onChange} onBlur={onBlur} />
   }
   
