@@ -19,6 +19,8 @@ function AddProduct(){
         }).then((res) => res.json())
             .then((data) => {
                 console.log(data)
+
+                //powiodlo się to moze warto wyczyścić formularz
             })
             .catch((err) => console.log(err))
 
