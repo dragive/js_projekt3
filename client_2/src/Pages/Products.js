@@ -25,10 +25,7 @@ import { BrowserRouter as useNavigate, Link} from "react-router-dom";
 //         )
 // }
 
-function editElement(id) {
-    console.log(id)
-    //todo
-}
+
 
 
 const UpdateValue = (value)=>{
@@ -150,6 +147,7 @@ function Products() {
     const [error, setError] = useState(null)
     const [isLoaded, setIsLoaded] = useState(false)
     const [items, setItems] = useState([])
+    const [reload, setReload] = useState(false)
 
 
   const [skipPageReset, setSkipPageReset] = React.useState(false)
@@ -201,8 +199,8 @@ function Products() {
 
 
 
-    function DeleteElement(id) {
-        const navigate = useNavigate()
+    function deleteElement(id) {
+
         console.log("ID:")
         console.log(id)
         fetch("http://localhost:3001/produkt/delete", {
@@ -212,8 +210,14 @@ function Products() {
             // mode: 'no-cors'
         }).then((res) => res.json())
             .then((data) => {
-                console.log(data)
-                navigate("/produkt")
+
+                setItems(old=>{
+                    return old.filter(o=>{return o.id!=id})
+                })
+
+                console.log("items")
+                console.log(items)
+                
             })
             .catch((err) => console.log(err))
     
@@ -251,16 +255,12 @@ function Products() {
                 Cell: (props) => {
                     const rowId = props.row.id
                     const id = props.row.values.id
+                    console.log("Cell: (props)")
+                    console.log(id)
                     return (
                         <div>
-                            <span onClick={() => { editElement() }}>
-                                <p className="przyciskFunkcyjny">Edytuj</p>
-
-                            </span>
-
-                            <span onClick={() => { DeleteElement(id) }}>
+                            <span onClick={() => { deleteElement(id) }}>
                                 <p className="przyciskFunkcyjny">Usuń</p>
-
                             </span>
                         </div>
                     )
@@ -281,6 +281,7 @@ function Products() {
     else if (!isLoaded) {
         return <div>Loading: ...</div>
     }
+
     else if (isLoaded) {
         console.log("@" + items)
         return (
