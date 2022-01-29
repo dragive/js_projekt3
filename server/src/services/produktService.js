@@ -38,6 +38,8 @@ function del(id){
 
 function update(ob){
     try{
+        console.log("json")
+        console.log(ob)
         checkObject(ob)
         db.queryNoResult(`update Produkt set nazwa = ?, ilosc = ?, cena = ? where id = ? `,[ob.nazwa, ob.ilosc,ob.cena,ob.id])
     }catch(err){

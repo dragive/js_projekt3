@@ -31,6 +31,21 @@ function editElement(id) {
 }
 
 
+const UpdateValue = (value)=>{
+
+    fetch("http://localhost:3001/produkt/update", {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(value),
+            // mode: 'no-cors'
+        }).then((res) => res.json())
+            .then((data) => {
+                console.log(data)
+            })
+            .catch((err) => console.log(err))
+
+}
+
 // Create an editable cell renderer
 const EditableCell = ({
     value: initialValue,
@@ -141,10 +156,17 @@ function Products() {
         setItems(old =>
           old.map((row, index) => {
             if (index === rowIndex) {
-              return {
-                ...old[rowIndex],
-                [columnId]: value,
-              }
+
+
+                let ret = {
+                    ...old[rowIndex],
+                    [columnId]: value,
+                  }
+                
+
+                UpdateValue(ret)
+                
+              return ret
             }
             return row
           })

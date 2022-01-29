@@ -79,6 +79,7 @@ function getAllTemplate(service){
 function updateTemplate(service){
     return function(req,res,next){
         ob = req.body
+        console.log(req.body)
         try{
             service.update(ob)
 
