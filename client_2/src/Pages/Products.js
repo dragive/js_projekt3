@@ -1,57 +1,155 @@
 import React, { useEffect, useState } from "react";
 import { useTable, useSortBy, useFilters } from "react-table"
 import './Components.css';
-import { BrowserRouter as useNavigate, Link } from "react-router-dom";
-import ProduktService from "../ProduktService"
-// import axios from 'axios'
+import { BrowserRouter as useNavigate, Link} from "react-router-dom";
 
-let dane1 = { id: 1, nazwa: "Jablko", ilosc: 1, cena: 2 };
-let dane2 = { id: 2, nazwa: "Gruszka", ilosc: 2, cena: 2 };
-let dane = [dane1, dane2]
 
-function TextFilter({
-    column: { filterValue, preFilteredRows, setFilter },
-}) {
-    const count = preFilteredRows.length
+//do usuniecia
+// let dane1 = { id: 1, nazwa: "Jablko", ilosc: 1, cena: 2 };
+// let dane2 = { id: 2, nazwa: "Gruszka", ilosc: 2, cena: 2 };
+// let dane = [dane1, dane2]
 
-    return (
-        <input
-            value={filterValue || ''}
-            onChange={e => {
-                setFilter(e.target.value || undefined)
-            }}
-            placeholder={`Search ${count} records...`}
-        />
-    )
-}
+// function TextFilter({
+//     column: { filterValue, preFilteredRows, setFilter },
+//     }) {
+//         const count = preFilteredRows.length
+
+//         return (
+//             <input
+//                 value={filterValue || ''}
+//                 onChange={e => {
+//                         setFilter(e.target.value || undefined)
+//                     }}
+//                 placeholder={`Search ${count} records...`}
+//             />
+//         )
+// }
 
 function editElement(id) {
     console.log(id)
     //todo
 }
-function deleteElement(id) {
-    console.log("ID:")
-    console.log(id)
-    fetch("http://localhost:3001/produkt/delete", {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: id }),
-        // mode: 'no-cors'
-    }).then((res) => res.json())
-        .then((data) => {
-            console.log(data)
-            //todo dodanie odswierzenia strony
-        })
-        .catch((err) => console.log(err))
 
+
+// Create an editable cell renderer
+const EditableCell = ({
+    value: initialValue,
+    row: { index },
+    column: { id },
+    updateMyData, // This is a custom function that we supplied to our table instance
+  }) => {
+    // We need to keep and update the state of the cell normally
+    const [value, setValue] = React.useState(initialValue)
+  
+    const onChange = e => {
+      setValue(e.target.value)
+    }
+  
+    // We'll only update the external data when the input is blurred
+    const onBlur = () => {
+      updateMyData(index, id, value)
+    }
+  
+    // If the initialValue is changed external, sync it up with our state
+    React.useEffect(() => {
+      setValue(initialValue)
+    }, [initialValue])
+  
+    return <input value={value} onChange={onChange} onBlur={onBlur} />
+  }
+  
+  // Set our editable cell renderer as the default Cell renderer
+  const defaultColumn = {
+    Cell: EditableCell,
+  }
+
+
+function Table({ columns, data, updateMyData, skipPageReset }){
+
+
+    // const defaultColumn = React.useMemo(
+    //     () => ({
+    //         Filter: TextFilter,
+    //     }),
+    //     []
+    // )
+
+    console.log("useTable")
+
+    const {
+        getTableProps,
+        getTableBodyProps,
+        headerGroups,
+        rows,
+        prepareRow,
+        getSortByToggleProps,
+    } = useTable({ columns, data, defaultColumn, updateMyData, },useSortBy)
+    console.log( {
+        getTableProps,
+        getTableBodyProps,
+        headerGroups,
+        rows,
+        prepareRow,
+    })
+    return (
+            <table className="tabela"  {...getTableProps()}>
+            <thead >
+                {headerGroups.map(headerGroup => (
+                    <tr {...headerGroup.getHeaderGroupProps()}>
+                        {headerGroup.headers.map(column => (
+                            <th {...column.getHeaderProps(column.getSortByToggleProps())} style={{color: "#000000", margin: "15px" }}>{column.render('Header')}
+                                <span>
+                                    {column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}
+                                </span>
+                                
+                            </th>
+
+                        ))}
+                    </tr>
+                ))}
+            </thead>
+            <tbody {...getTableBodyProps()}>
+                {rows.map(row => {
+                    prepareRow(row)
+                    return (
+                        <tr {...row.getRowProps()}>
+                            {row.cells.map(cell => {
+                                return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                            })}
+                        </tr>
+                    )
+                })}
+            </tbody>
+        </table>
+    )
 }
 
 function Products() {
 
 
+    
     const [error, setError] = useState(null)
     const [isLoaded, setIsLoaded] = useState(false)
     const [items, setItems] = useState([])
+
+
+  const [skipPageReset, setSkipPageReset] = React.useState(false)
+
+    const updateMyData = (rowIndex, columnId, value) => {
+        // We also turn on the flag to not reset the page
+        setSkipPageReset(true)
+        setItems(old =>
+          old.map((row, index) => {
+            if (index === rowIndex) {
+              return {
+                ...old[rowIndex],
+                [columnId]: value,
+              }
+            }
+            return row
+          })
+        )
+      }
 
 
     useEffect(() => {
@@ -75,11 +173,28 @@ function Products() {
     }, []
     )
 
-    console.log("123123123")
-    console.log(items)
 
+
+    function DeleteElement(id) {
+        const navigate = useNavigate()
+        console.log("ID:")
+        console.log(id)
+        fetch("http://localhost:3001/produkt/delete", {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: id }),
+            // mode: 'no-cors'
+        }).then((res) => res.json())
+            .then((data) => {
+                console.log(data)
+                navigate("/produkt")
+            })
+            .catch((err) => console.log(err))
+    
+    }
+    
+    
     const data = React.useMemo(() =>
-
         items,
         [items]
     )
@@ -117,7 +232,7 @@ function Products() {
 
                             </span>
 
-                            <span onClick={() => { deleteElement(id) }}>
+                            <span onClick={() => { DeleteElement(id) }}>
                                 <p className="przyciskFunkcyjny">Usuń</p>
 
                             </span>
@@ -129,22 +244,10 @@ function Products() {
         []
     )
 
-    const defaultColumn = React.useMemo(
-        () => ({
-            Filter: TextFilter,
-        }),
-        []
-    )
+    useEffect(() => {
+        setSkipPageReset(false)
+      }, [data])
 
-    console.log("useTable")
-
-    const {
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        rows,
-        prepareRow,
-    } = useTable({ columns, data, defaultColumn, }, useSortBy,)
     //useFilters
     if (error) {
         return <div>Error: {error.message}</div>
@@ -192,36 +295,12 @@ function Products() {
                                     <div className="nazwaRamka">
                                         <div className="tekstNazwaRamka">Elementy</div>
                                         <div className="margines">
-
-                                            <table className="tabela"  {...getTableProps()}>
-                                                <thead >
-                                                    {headerGroups.map(headerGroup => (
-                                                        <tr {...headerGroup.getHeaderGroupProps()}>
-                                                            {headerGroup.headers.map(column => (
-                                                                <th {...column.getHeaderProps(column.getSortByToggleProps())} style={{color: "#000000", margin: "15px" }}>{column.render('Header')}
-                                                                    <span>
-                                                                        {column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}
-                                                                    </span>
-                                                                    {/* <div>{column.canFilter ? column.render('Filter') : null}</div> */}
-                                                                </th>
-
-                                                            ))}
-                                                        </tr>
-                                                    ))}
-                                                </thead>
-                                                <tbody {...getTableBodyProps()}>
-                                                    {rows.map(row => {
-                                                        prepareRow(row)
-                                                        return (
-                                                            <tr {...row.getRowProps()}>
-                                                                {row.cells.map(cell => {
-                                                                    return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                                                                })}
-                                                            </tr>
-                                                        )
-                                                    })}
-                                                </tbody>
-                                            </table>
+                                        <Table 
+                                        columns={columns}
+                                        data={data}
+                                        updateMyData={updateMyData}
+                                        skipPageReset={skipPageReset}
+                                        />
                                         </div>
                                     </div>
                                 </td>
