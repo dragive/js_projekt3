@@ -50,6 +50,8 @@ function delTemplate(service){
 
 function addTemplate(service){
     return function(req,res,next){
+        
+        console.log("req.body")
         console.log(req.body)
         try{
             service.insert(req.body)

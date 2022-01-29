@@ -71,7 +71,7 @@ const EditableCell = ({
     }, [initialValue])
     console.log(id)
     if(id == "id"){
-        return <input value={value} disabled/>
+        return  <input value={value} disabled/>
     }
     
     return <input value={value} onChange={onChange} onBlur={onBlur} />
