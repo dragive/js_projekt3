@@ -25,6 +25,21 @@ import { BrowserRouter as useNavigate, Link } from "react-router-dom";
 //         )
 // }
 
+const textfield = {
+    backgroundColor: "#CCCCCC",
+    padding: "3px",
+  };
+  const textfieldid = {
+    backgroundColor: "#CCCCCC",
+    padding: "5px",
+    width: "22px",
+    textAlign: "center",
+  };
+  const naglowek = {
+    color: "#000000", 
+    margin: "15px",
+    textAlign: "left",
+  };
 
 
 
@@ -68,10 +83,10 @@ const EditableCell = ({
     }, [initialValue])
     console.log(id)
     if (id == "id") {
-        return <input value={value} disabled />
+        return <input style={textfieldid} value={value} disabled />
     }
 
-    return <input value={value} onChange={onChange} onBlur={onBlur} />
+    return <input style={textfield} value={value} onChange={onChange} onBlur={onBlur} />
 }
 
 // Set our editable cell renderer as the default Cell renderer
@@ -113,7 +128,7 @@ function Table({ columns, data, updateMyData, skipPageReset }) {
                 {headerGroups.map(headerGroup => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
                         {headerGroup.headers.map(column => (
-                            <th {...column.getHeaderProps(column.getSortByToggleProps())} style={{ color: "#000000", margin: "15px"}}>{column.render('Header')}
+                            <th {...column.getHeaderProps(column.getSortByToggleProps())} style={naglowek}>{column.render('Header')}
                                 <span>
                                     {column.isSorted ? (column.isSortedDesc ? ' ▼' : ' ▲') : ''}
                                 </span>
@@ -259,9 +274,9 @@ function Products() {
                 Cell: (props) => {
                     const colorRef = React.useRef();
                     return (
-                        <div>
-                            <select ref={colorRef}>
-                              <option value='accepted'>Zaakceptowano</option>
+                        <div >
+                            <select ref={colorRef} >
+                              <option  value='accepted'>Zaakceptowano</option>
                               <option value='inprogress'>W trakcie</option>
                               <option value='finalised'>Zakończono</option>
                               <option value='canceled'>Anulowano</option>
