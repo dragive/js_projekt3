@@ -2,19 +2,27 @@ import React, { useState } from "react";
 import './Components.css';
 import { BrowserRouter as useNavigate, Link  } from "react-router-dom";
 
+function getCurrentDate(separator=''){
 
+    let newDate = new Date()
+    let date = newDate.getDate();
+    let month = newDate.getMonth() + 1;
+    let year = newDate.getFullYear();
+    
+    return `${year}${separator}${month<10?`0${month}`:`${month}`}${separator}${date}`
+    }
 
 function AddProduct(){
 
     function AddToDB(e){
         e.preventDefault();
-        console.log({name,amount,price})
+        console.log({pracownikId,klientId})
 
 
         fetch("http://localhost:3001/zamowienie/add", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({nazwa:name,ilosc:amount,cena:price}),
+            body: JSON.stringify({pracownikId:parseInt(pracownikId),klientId:parseInt(klientId),stan:"'Zaakceptowane'",dataZalozenia:getCurrentDate(),dataRealizacji:""}),
             // mode: 'no-cors'
         }).then((res) => res.json())
             .then((data) => {
@@ -26,9 +34,8 @@ function AddProduct(){
 
     }
 
-    const [name,setName] = useState("")
-    const [amount,setAmount] = useState(0)
-    const [price,setPrice] = useState(0)
+    const [pracownikId,setPracownikId] = useState(0)
+    const [klientId,setKlientId] = useState(0)
 
     return(
             <div class="popupramka">
@@ -38,13 +45,13 @@ function AddProduct(){
                     <form onSubmit={AddToDB}>
                     <table class="tabela">
                             <tr>
-                                <td>Pracownik ID: </td> <td> <input class="poleDoWpisywaniaProdukty" type="text" onInput={e=> setName(e.target.value)}  name="productname" id="name"/></td>
+                                <td>Pracownik ID: </td> <td> <input class="poleDoWpisywaniaProdukty" type="text" onInput={e=> setPracownikId(e.target.value)}  name="productname" id="name"/></td>
                             </tr>
                             <tr>
                                 <br></br>
                             </tr>
                             <tr>
-                                <td>Klient ID: </td> <td> <input class="poleDoWpisywaniaProdukty" type="text" onInput={e=> setPrice(e.target.value)} name="productprice" id="price"/></td>
+                                <td>Klient ID: </td> <td> <input class="poleDoWpisywaniaProdukty" type="text" onInput={e=> setKlientId(e.target.value)} name="productprice" id="price"/></td>
                             </tr>
                             <tr>
                                 <br></br>
