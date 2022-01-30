@@ -154,7 +154,7 @@ function Table({ columns, data, updateMyData, skipPageReset }){
     )
 }
 
-function Products() {
+function Clients() {
 
 
     
@@ -372,4 +372,4 @@ function Products() {
 
 
 
-export default Products;
+export default Clients;

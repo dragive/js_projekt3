@@ -7,7 +7,9 @@ import ErrorPage from "./Pages/ErrorPage";
 import Products from "./Pages/Products";
 import Orders from "./Pages/Orders";
 import Clients from "./Pages/Clients";
+import OrderProducts from "./Pages/OrderProducts";
 import AddProduct from "./Pages/AddProduct";
+import AddOrderProduct from "./Pages/AddOrderProduct";
 import AddOrder from "./Pages/AddOrder";
 import AddClient from "./Pages/AddClient";
 import ModifyProducts from "./Pages/ModifyProducts";
@@ -26,11 +28,13 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/products" element={<Products />} />
         <Route path="/addproducts" element={<AddProduct />} />
+        <Route path="/addorderproducts" element={<AddOrderProduct />} />
         <Route path="/addorders" element={<AddOrder />} />
         <Route path="/addclients" element={<AddClient />} />
         <Route path="/modifyproduct" element={<ModifyProducts />} />
         <Route path="/deleteproduct" element={<DeleteProduct />} />
         <Route path="/orders" element={<Orders />} />
+        <Route path="/orderproducts" element={<OrderProducts />} />
         <Route path="/clients" element={<Clients />} />
         <Route path="/about" element={<About />} />
         <Route path="/profile/:username" element={<Profile />} />
