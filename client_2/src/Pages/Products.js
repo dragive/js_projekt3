@@ -115,7 +115,7 @@ function Table({ columns, data, updateMyData, skipPageReset }){
                         {headerGroup.headers.map(column => (
                             <th {...column.getHeaderProps(column.getSortByToggleProps())} style={{color: "#000000", margin: "15px" }}>{column.render('Header')}
                                 <span>
-                                    {column.isSorted ? (column.isSortedDesc ? ' 🔽' : ' 🔼') : ''}
+                                    {column.isSorted ? (column.isSortedDesc ? ' ▼' : ' ▲') : ''}
                                 </span>
                                 
                             </th>
@@ -305,11 +305,10 @@ function Products() {
                                             <table className="tabela">
                                                 <tbody>
                                                     <tr>
-                                                        <td><input className="poleDoWpisywania" type="text" name="search" /></td> <td><button className="przyciskFunkcyjny">&lt;Szukaj&gt;</button></td>
+                                                        <td><input className="poleDoWpisywaniaProdukty" type="text" name="search" /></td> <td><button className="przyciskFunkcyjny">&lt;Szukaj&gt;</button></td>
                                                     </tr>
                                                 </tbody>
                                             </table>
-
                                         </div>
                                     </div>
                                 </td>
@@ -334,7 +333,6 @@ function Products() {
                             </tr>
                             <tr>
                                 <td>
-
                                     <Link to="/" className="przyciskFunkcyjny"> &lt;Cofnij&gt; </Link>
                                 </td>
                             </tr>

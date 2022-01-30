@@ -38,19 +38,19 @@ function AddProduct(){
                     <form onSubmit={AddToDB}>
                     <table class="tabela">
                             <tr>
-                                <td>Nazwa: </td> <td> <input class="poleDoWpisywania" type="text" onInput={e=> setName(e.target.value)}  name="productname" id="name"/></td>
+                                <td>Nazwa: </td> <td> <input class="poleDoWpisywaniaProdukty" type="text" onInput={e=> setName(e.target.value)}  name="productname" id="name"/></td>
                             </tr>
                             <tr>
                                 <br></br>
                             </tr>
                             <tr>
-                                <td>Cena: </td> <td> <input class="poleDoWpisywania" type="text" onInput={e=> setPrice(e.target.value)} name="productprice" id="price"/></td>
+                                <td>Cena: </td> <td> <input class="poleDoWpisywaniaProdukty" type="text" onInput={e=> setPrice(e.target.value)} name="productprice" id="price"/></td>
                             </tr>
                             <tr>
                                 <br></br>
                             </tr>
                             <tr>
-                                <td>Ilość: </td> <td> <input class="poleDoWpisywania" type="text" onInput={e=> setAmount(e.target.value)} name="productamount" /></td>
+                                <td>Ilość: </td> <td> <input class="poleDoWpisywaniaProdukty" type="text" onInput={e=> setAmount(e.target.value)} name="productamount" /></td>
                             </tr>
                             <tr>
                                 <br></br>
