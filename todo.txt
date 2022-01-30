@@ -1,0 +1,3 @@
+dodanie validacji
+dodanie po utworzeniu clearowania formularzy
+dodanie przycisków powrót

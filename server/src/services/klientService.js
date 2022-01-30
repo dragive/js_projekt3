@@ -33,9 +33,11 @@ function del(id){
 }
 
 function update(ob){
+    console.log("!11")
+    console.log(ob)
     try{
         checkObject(ob)
-        db.queryNoResult(`update Klient set nazwa_firmy=?,nip=?,email=?,telefon=?,adres=? where id = ? `,[ob.nazwaFirmy, ob.nip,ob.email,ob.telefon,ob.adres,ob.id])
+        db.queryNoResult(`update Klient set nazwa_firmy=?,nip=?,email=?,telefon=?,adres=? where id = ? `,[ob.nazwa_firmy, ob.nip,ob.email,ob.telefon,ob.adres,ob.id])
     }catch(err){
         console.log("Service Update Err: ",err)
     }

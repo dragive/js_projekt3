@@ -12,11 +12,11 @@ router.get('/getAll', baseService.getAllTemplate(dostawaService));
 router.post('/add',baseService.addTemplate(dostawaService))
 
 // todo generyzacja tego by był podawany tylko service jako parametr 
-router.get('/delete',baseService.delTemplate(dostawaService))
+router.post('/delete',baseService.delTemplate(dostawaService))
 // console.log(delTemplate(NaN))
 
 
-router.get("/update", baseService.updateTemplate(dostawaService))
+router.post("/update", baseService.updateTemplate(dostawaService))
 
 
 module.exports = router

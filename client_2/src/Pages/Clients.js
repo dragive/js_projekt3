@@ -4,27 +4,6 @@ import './Components.css';
 import { BrowserRouter as useNavigate, Link} from "react-router-dom";
 
 
-//do usuniecia
-// let dane1 = { id: 1, nazwa: "Jablko", ilosc: 1, cena: 2 };
-// let dane2 = { id: 2, nazwa: "Gruszka", ilosc: 2, cena: 2 };
-// let dane = [dane1, dane2]
-
-// function TextFilter({
-//     column: { filterValue, preFilteredRows, setFilter },
-//     }) {
-//         const count = preFilteredRows.length
-
-//         return (
-//             <input
-//                 value={filterValue || ''}
-//                 onChange={e => {
-//                         setFilter(e.target.value || undefined)
-//                     }}
-//                 placeholder={`Search ${count} records...`}
-//             />
-//         )
-// }
-
 const textfield = {
     backgroundColor: "#CCCCCC",
     padding: "3px",
@@ -97,15 +76,6 @@ const EditableCell = ({
 function Table({ columns, data, updateMyData, skipPageReset }){
 
 
-    // const defaultColumn = React.useMemo(
-    //     () => ({
-    //         Filter: TextFilter,
-    //     }),
-    //     []
-    // )
-
-    console.log("useTable")
-
     const {
         getTableProps,
         getTableBodyProps,
@@ -114,13 +84,7 @@ function Table({ columns, data, updateMyData, skipPageReset }){
         prepareRow,
         getSortByToggleProps,
     } = useTable({ columns, data, defaultColumn, updateMyData, },useSortBy)
-    console.log( {
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        rows,
-        prepareRow,
-    })
+
     return (
             <table className="tabela"  {...getTableProps()}>
             <thead >

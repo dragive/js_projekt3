@@ -16,7 +16,7 @@ router.get('/delete',baseService.delTemplate(tableSpecifiedService))
 // console.log(delTemplate(NaN))
 
 
-router.get("/update", baseService.updateTemplate(tableSpecifiedService))
+router.post("/update", baseService.updateTemplate(tableSpecifiedService))
 
 
 module.exports = router
