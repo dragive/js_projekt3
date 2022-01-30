@@ -241,7 +241,7 @@ function Products() {
                 accessor: 'nazwa',
             },
             {
-                Header: 'Ilosc',
+                Header: 'Ilość',
                 accessor: 'ilosc',
             },
             {

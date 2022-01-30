@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTable, useSortBy, useFilters } from "react-table"
 import './Components.css';
-import { BrowserRouter as useNavigate, Link } from "react-router-dom";
+import { BrowserRouter as useNavigate, Link} from "react-router-dom";
 
 
 //do usuniecia
@@ -28,18 +28,18 @@ import { BrowserRouter as useNavigate, Link } from "react-router-dom";
 
 
 
-const UpdateValue = (value) => {
+const UpdateValue = (value)=>{
 
-    fetch("http://localhost:3001/zamowienie/update", {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(value),
-        // mode: 'no-cors'
-    }).then((res) => res.json())
-        .then((data) => {
-            console.log(data)
-        })
-        .catch((err) => console.log(err))
+    fetch("http://localhost:3001/klient/update", {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(value),
+            // mode: 'no-cors'
+        }).then((res) => res.json())
+            .then((data) => {
+                console.log(data)
+            })
+            .catch((err) => console.log(err))
 
 }
 
@@ -49,38 +49,38 @@ const EditableCell = ({
     row: { index },
     column: { id },
     updateMyData, // This is a custom function that we supplied to our table instance
-}) => {
+  }) => {
     // We need to keep and update the state of the cell normally
     const [value, setValue] = React.useState(initialValue)
-
+  
     const onChange = e => {
-        setValue(e.target.value)
+      setValue(e.target.value)
     }
-
+  
     // We'll only update the external data when the input is blurred
     const onBlur = () => {
-        updateMyData(index, id, value)
+      updateMyData(index, id, value)
     }
-
+  
     // If the initialValue is changed external, sync it up with our state
     React.useEffect(() => {
-        setValue(initialValue)
+      setValue(initialValue)
     }, [initialValue])
     console.log(id)
-    if (id == "id") {
-        return <input value={value} disabled />
+    if(id == "id"){
+        return  <input value={value} disabled/>
     }
-
+    
     return <input value={value} onChange={onChange} onBlur={onBlur} />
-}
-
-// Set our editable cell renderer as the default Cell renderer
-const defaultColumn = {
+  }
+  
+  // Set our editable cell renderer as the default Cell renderer
+  const defaultColumn = {
     Cell: EditableCell,
-}
+  }
 
 
-function Table({ columns, data, updateMyData, skipPageReset }) {
+function Table({ columns, data, updateMyData, skipPageReset }){
 
 
     // const defaultColumn = React.useMemo(
@@ -99,8 +99,8 @@ function Table({ columns, data, updateMyData, skipPageReset }) {
         rows,
         prepareRow,
         getSortByToggleProps,
-    } = useTable({ columns, data, defaultColumn, updateMyData, }, useSortBy)
-    console.log({
+    } = useTable({ columns, data, defaultColumn, updateMyData, },useSortBy)
+    console.log( {
         getTableProps,
         getTableBodyProps,
         headerGroups,
@@ -108,16 +108,16 @@ function Table({ columns, data, updateMyData, skipPageReset }) {
         prepareRow,
     })
     return (
-        <table className="tabela"  {...getTableProps()}>
+            <table className="tabela"  {...getTableProps()}>
             <thead >
                 {headerGroups.map(headerGroup => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
                         {headerGroup.headers.map(column => (
-                            <th {...column.getHeaderProps(column.getSortByToggleProps())} style={{ color: "#000000", margin: "15px"}}>{column.render('Header')}
+                            <th {...column.getHeaderProps(column.getSortByToggleProps())} style={{color: "#000000", margin: "15px" }}>{column.render('Header')}
                                 <span>
                                     {column.isSorted ? (column.isSortedDesc ? ' ▼' : ' ▲') : ''}
                                 </span>
-
+                                
                             </th>
 
                         ))}
@@ -143,41 +143,41 @@ function Table({ columns, data, updateMyData, skipPageReset }) {
 function Products() {
 
 
-
+    
     const [error, setError] = useState(null)
     const [isLoaded, setIsLoaded] = useState(false)
     const [items, setItems] = useState([])
     const [reload, setReload] = useState(false)
 
 
-    const [skipPageReset, setSkipPageReset] = React.useState(false)
+  const [skipPageReset, setSkipPageReset] = React.useState(false)
 
     const updateMyData = (rowIndex, columnId, value) => {
         // We also turn on the flag to not reset the page
         setSkipPageReset(true)
         setItems(old =>
-            old.map((row, index) => {
-                if (index === rowIndex) {
+          old.map((row, index) => {
+            if (index === rowIndex) {
 
 
-                    let ret = {
-                        ...old[rowIndex],
-                        [columnId]: value,
-                    }
+                let ret = {
+                    ...old[rowIndex],
+                    [columnId]: value,
+                  }
+                
 
-
-                    UpdateValue(ret)
-
-                    return ret
-                }
-                return row
-            })
+                UpdateValue(ret)
+                
+              return ret
+            }
+            return row
+          })
         )
-    }
+      }
 
 
     useEffect(() => {
-        fetch("http://localhost:3001/zamowienie/getAll")
+        fetch("http://localhost:3001/klient/getAll")
             .then(res => res.json())
             .then((result) => {
                 console.log("result")
@@ -203,7 +203,7 @@ function Products() {
 
         console.log("ID:")
         console.log(id)
-        fetch("http://localhost:3001/zamowienie/delete", {
+        fetch("http://localhost:3001/klient/delete", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id: id }),
@@ -211,19 +211,19 @@ function Products() {
         }).then((res) => res.json())
             .then((data) => {
 
-                setItems(old => {
-                    return old.filter(o => { return o.id != id })
+                setItems(old=>{
+                    return old.filter(o=>{return o.id!=id})
                 })
 
                 console.log("items")
                 console.log(items)
-
+                
             })
             .catch((err) => console.log(err))
-
+    
     }
-
-
+    
+    
     const data = React.useMemo(() =>
         items,
         [items]
@@ -237,38 +237,24 @@ function Products() {
                 accessor: 'id',
             },
             {
-                Header: 'Data złożenia',
-                accessor: 'data_zalozenia',
+                Header: 'Nazwa',
+                accessor: 'nazwa_firmy',
             },
             {
-                Header: 'Id pracownika',
-                accessor: 'pracownik_id',
+                Header: 'NIP',
+                accessor: 'nip',
             },
             {
-                Header: 'Id klienta',
-                accessor: 'klient_id',
+                Header: 'Email',
+                accessor: 'email',
             },
             {
-                Header: 'Data realizacji',
-                accessor: 'data_realizacji',
+                Header: 'Telefon',
+                accessor: 'telefon',
             },
             {
-                Header: 'Stan',
-                accessor: 'stan',
-                disableSortBy: true,
-                Cell: (props) => {
-                    const colorRef = React.useRef();
-                    return (
-                        <div>
-                            <select ref={colorRef}>
-                              <option value='accepted'>Zaakceptowano</option>
-                              <option value='inprogress'>W trakcie</option>
-                              <option value='finalised'>Zakończono</option>
-                              <option value='canceled'>Anulowano</option>
-                            </select>
-                        </div>
-                    )
-                }
+                Header: 'Adres',
+                accessor: 'adres',
             },
             {
                 Header: 'Akcje',
@@ -281,22 +267,9 @@ function Products() {
                     console.log(id)
                     return (
                         <div>
-                            <table>
-                                <tr>
-                                    <td>
-                                        <span onClick={() => { deleteElement(id) }}>
-                                            <p className="przyciskFunkcyjny">Usuń</p>
-                                        </span>
-                                    </td>
-                                    <td>|</td>
-                                    <td>
-                                    <span onClick={() => { deleteElement(id) }}>
-                                        <p className="przyciskFunkcyjny">Szczegóły</p>
-                                    </span>
-                                </td>
-                                </tr>
-                                
-                            </table>
+                            <span onClick={() => { deleteElement(id) }}>
+                                <p className="przyciskFunkcyjny">Usuń</p>
+                            </span>
                         </div>
                     )
                 }
@@ -307,7 +280,7 @@ function Products() {
 
     useEffect(() => {
         setSkipPageReset(false)
-    }, [data])
+      }, [data])
 
     //useFilters
     if (error) {
@@ -322,13 +295,13 @@ function Products() {
         return (
             <div className="zamowienieRamka">
                 <div className="nazwaRamka">
-                    <div className="tekstNazwaRamka" >Zarządzanie zamówieniami</div>
+                    <div className="tekstNazwaRamka" >Zarządzanie klientami </div>
                     <div className="margines">
                         <table className="tabela">
                             <tr>
                                 <td>
                                     <div>
-                                        <Link to="/addorders" className="przyciskFunkcyjny"> Dodaj zamówienie </Link>
+                                        <Link to="/addclients" className="przyciskFunkcyjny"> Dodaj klienta </Link>
                                         {/* <Link to="/modifyproduct" className="przycisk"> Modyfikuj </Link>
                                         <Link to="/deleteproduct" className="przycisk"> Usuń </Link> */}
                                     </div>
@@ -348,20 +321,20 @@ function Products() {
                                     </div>
                                 </td>
                             </tr>
-                        </table>
-                        <table className="tabela">
+                            </table>
+                            <table className="tabela">
                             <tr>
                                 <td>
                                     <br></br>
                                     <div className="nazwaRamka">
                                         <div className="tekstNazwaRamka">Elementy</div>
                                         <div className="margines">
-                                            <Table
-                                                columns={columns}
-                                                data={data}
-                                                updateMyData={updateMyData}
-                                                skipPageReset={skipPageReset}
-                                            />
+                                        <Table 
+                                        columns={columns}
+                                        data={data}
+                                        updateMyData={updateMyData}
+                                        skipPageReset={skipPageReset}
+                                        />
                                         </div>
                                     </div>
                                 </td>

@@ -11,7 +11,7 @@ function AddProduct(){
         console.log({name,amount,price})
 
 
-        fetch("http://localhost:3001/produkt/add", {
+        fetch("http://localhost:3001/zamowienie/add", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({nazwa:name,ilosc:amount,cena:price}),
@@ -33,31 +33,27 @@ function AddProduct(){
     return(
             <div class="popupramka">
                 <div class="nazwaRamka">
-                    <div class="tekstNazwaRamka">Dodaj nowy produkt</div>
+                    <div class="tekstNazwaRamka">Dodaj nowe zamówienie</div>
                     <div class="margines">
                     <form onSubmit={AddToDB}>
                     <table class="tabela">
                             <tr>
-                                <td>Nazwa: </td> <td> <input class="poleDoWpisywaniaProdukty" type="text" onInput={e=> setName(e.target.value)}  name="productname" id="name"/></td>
+                                <td>Pracownik ID: </td> <td> <input class="poleDoWpisywaniaProdukty" type="text" onInput={e=> setName(e.target.value)}  name="productname" id="name"/></td>
                             </tr>
                             <tr>
                                 <br></br>
                             </tr>
                             <tr>
-                                <td>Cena: </td> <td> <input class="poleDoWpisywaniaProdukty" type="text" onInput={e=> setPrice(e.target.value)} name="productprice" id="price"/></td>
+                                <td>Klient ID: </td> <td> <input class="poleDoWpisywaniaProdukty" type="text" onInput={e=> setPrice(e.target.value)} name="productprice" id="price"/></td>
                             </tr>
                             <tr>
                                 <br></br>
                             </tr>
                             <tr>
-                                <td>Ilość: </td> <td> <input class="poleDoWpisywaniaProdukty" type="text" onInput={e=> setAmount(e.target.value)} name="productamount" /></td>
-                            </tr>
-                            <tr>
                                 <br></br>
                             </tr>
-
                             <tr>
-                                <td><Link to="/products" class="przyciskFunkcyjny"> &lt;Cofnij&gt; </Link></td> <td><input type="submit" class="przyciskFunkcyjny" value="<Zapisz>"/></td>
+                                <td><Link to="/orders" class="przyciskFunkcyjny"> &lt;Cofnij&gt; </Link></td> <td><input type="submit" class="przyciskFunkcyjny" value="<Zapisz>"/></td>
                             </tr>
 
                         </table>
