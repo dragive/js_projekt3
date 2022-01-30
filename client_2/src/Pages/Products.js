@@ -32,8 +32,8 @@ const textfield = {
   };
   const textfieldid = {
     backgroundColor: "#CCCCCC",
-    padding: "5px",
-    width: "22px",
+    padding: "3px",
+    width: "25px",
     textAlign: "center",
   };
   const naglowek = {
