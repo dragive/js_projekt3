@@ -143,6 +143,7 @@ function Orders() {
     const [isLoaded, setIsLoaded] = useState(false)
     const [items, setItems] = useState([])
     const [reload, setReload] = useState(false)
+    
 
 
     const [skipPageReset, setSkipPageReset] = React.useState(false)
@@ -224,6 +225,23 @@ function Orders() {
         [items]
     )
 
+
+    // const [label,setLabel] = useState("")
+
+    function changeSelect(o,row){
+        row.values.stan = o.target.value
+        console.log("row.values")
+        console.log(row.values)
+        UpdateValue({
+            id:row.values.id,
+            dataZalozenia: row.values.data_zalozenia,
+            pracownikId: row.values.pracownik_id,
+            klientId: row.values.klient_id,
+            dataRealizacji: row.values.data_realizacji,
+            stan: row.values.stan
+        })
+    }
+
     const columns = React.useMemo(
         () =>
 
@@ -255,11 +273,17 @@ function Orders() {
                     const colorRef = React.useRef();
                     return (
                         <div >
-                            <select ref={colorRef} >
-                              <option value='accepted'>Zaakceptowano</option>
-                              <option value='inprogress'>W trakcie</option>
-                              <option value='finalised'>Zakończono</option>
-                              <option value='canceled'>Anulowano</option>
+                            {/*  value={props.row.values.stan} */}
+                            <select ref={colorRef}  onChange={(e)=>{changeSelect(e,props.row)}}>
+                            
+                            <option value={props.row.values.stan}>{props.row.values.stan}</option>
+                            
+                            <option value="---" disabled>---</option>
+                            
+                            <option value='Zaakceptowano'>Zaakceptowano</option>
+        <option value='W trakcie'>W trakcie</option>
+    <option value='Zakończono'>Zakończono</option>
+    <option value='Anulowano'>Anulowano</option>
                             </select>
                         </div>
                     )
