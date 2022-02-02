@@ -44,7 +44,7 @@ const textfield = {
 
 const UpdateValue = (value)=>{
 
-    fetch("http://localhost:3001/produkt/update", {
+    fetch("http://localhost:3001/zamowienieProdukt/update", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(value),
@@ -254,7 +254,7 @@ function OrderProducts() {
             },
             {
                 Header: 'Produkt ID',
-                accessor: 'nazwa',
+                accessor: 'produkt_id',
             },
             {
                 Header: 'Ilość',
@@ -318,7 +318,7 @@ function OrderProducts() {
                             <tr>
                                 <td>
                                     <div>
-                                        <Link to="/addorderproducts" className="przyciskFunkcyjny"> Dodaj produkt </Link>
+                                        <Link to={`/addorderproducts?id=${""}`} className="przyciskFunkcyjny"> Dodaj produkt </Link>
                                         {/* <Link to="/modifyproduct" className="przycisk"> Modyfikuj </Link>
                                         <Link to="/deleteproduct" className="przycisk"> Usuń </Link> */}
                                     </div>
