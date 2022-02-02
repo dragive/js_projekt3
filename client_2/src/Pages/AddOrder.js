@@ -1,17 +1,7 @@
 import React, { useState } from "react";
 import './Components.css';
 import { BrowserRouter as useNavigate, Link  } from "react-router-dom";
-
-function getCurrentDate(separator=''){
-
-    let newDate = new Date()
-    let date = newDate.getDate();
-    let month = newDate.getMonth() + 1;
-    let year = newDate.getFullYear();
-    
-    return `${year}${separator}${month<10?`0${month}`:`${month}`}${separator}${date}`
-    }
-
+import {getCurrentDate} from "../Services/CommonServices"
 function AddProduct(){
 
     function AddToDB(e){

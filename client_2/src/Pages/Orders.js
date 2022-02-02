@@ -3,6 +3,8 @@ import { useTable, useSortBy, useFilters } from "react-table"
 import './Components.css';
 import { BrowserRouter as useNavigate, Link } from "react-router-dom";
 
+import {getCurrentDate} from "../Services/CommonServices"
+
 
 
 const textfield = {
@@ -181,8 +183,7 @@ function Orders() {
         )
     }
 
-
-    useEffect(() => {
+    function getItemsFromAPI(){
         fetch("http://localhost:3001/zamowienie/getAll")
             .then(res => res.json())
             .then((result) => {
@@ -200,6 +201,10 @@ function Orders() {
                 setIsLoaded(true);
                 setError(error);
             })
+    }
+
+    useEffect(() => {
+        getItemsFromAPI()
     }, []
     )
 
@@ -242,6 +247,25 @@ function Orders() {
         row.values.stan = o.target.value
         console.log("row.values")
         console.log(row.values)
+        console.log("row.values.stan ")
+        let r = row.values
+        console.log(r.stan )
+        if(r.stan == "Zakończono"){
+
+
+        UpdateValue({
+            id:row.values.id,
+            dataZalozenia: row.values.data_zalozenia,
+            pracownikId: row.values.pracownik_id,
+            klientId: row.values.klient_id,
+            dataRealizacji: ((row.values.data_realizacji == '')? getCurrentDate():row.values.dataRealizacji),
+            stan: row.values.stan
+        })
+        getItemsFromAPI()
+        
+        }
+        else{
+
         UpdateValue({
             id: row.values.id,
             dataZalozenia: row.values.data_zalozenia,
@@ -250,6 +274,8 @@ function Orders() {
             dataRealizacji: row.values.data_realizacji,
             stan: row.values.stan
         })
+        }
+    
     }
 
     const columns = React.useMemo(
