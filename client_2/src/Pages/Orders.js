@@ -8,18 +8,19 @@ import { BrowserRouter as useNavigate, Link } from "react-router-dom";
 const textfield = {
     backgroundColor: "#CCCCCC",
     padding: "3px",
-  };
-  const textfieldid = {
+};
+const textfieldid = {
     backgroundColor: "#CCCCCC",
     padding: "3px",
     width: "25px",
     textAlign: "center",
-  };
-  const naglowek = {
-    color: "#000000", 
+    
+};
+const naglowek = {
+    color: "#000000",
     margin: "15px",
     textAlign: "left",
-  };
+};
 
 
 
@@ -50,7 +51,7 @@ const EditableCell = ({
 
     const onChange = e => {
         let temp = e.target.value
-        
+
         setValue(temp)
     }
 
@@ -145,7 +146,7 @@ function Orders() {
     const [isLoaded, setIsLoaded] = useState(false)
     const [items, setItems] = useState([])
     const [reload, setReload] = useState(false)
-    
+
 
 
     const [skipPageReset, setSkipPageReset] = React.useState(false)
@@ -165,7 +166,7 @@ function Orders() {
 
 
                     UpdateValue({
-                        id:ret.id,
+                        id: ret.id,
                         dataZalozenia: ret.data_zalozenia,
                         pracownikId: ret.pracownik_id,
                         klientId: ret.klient_id,
@@ -237,12 +238,12 @@ function Orders() {
 
     // const [label,setLabel] = useState("")
 
-    function changeSelect(o,row){
+    function changeSelect(o, row) {
         row.values.stan = o.target.value
         console.log("row.values")
         console.log(row.values)
         UpdateValue({
-            id:row.values.id,
+            id: row.values.id,
             dataZalozenia: row.values.data_zalozenia,
             pracownikId: row.values.pracownik_id,
             klientId: row.values.klient_id,
@@ -283,16 +284,16 @@ function Orders() {
                     return (
                         <div >
                             {/*  value={props.row.values.stan} */}
-                            <select ref={colorRef}  onChange={(e)=>{changeSelect(e,props.row)}}>
-                            
-                            <option value={props.row.values.stan}>{props.row.values.stan}</option>
-                            
-                            <option value="---" disabled>---</option>
-                            
-                            <option value='Zaakceptowano'>Zaakceptowano</option>
-        <option value='W trakcie'>W trakcie</option>
-    <option value='Zakończono'>Zakończono</option>
-    <option value='Anulowano'>Anulowano</option>
+                            <select style={textfield} ref={colorRef} onChange={(e) => { changeSelect(e, props.row) }}>
+
+                                <option value={props.row.values.stan}>{props.row.values.stan}</option>
+
+                                <option value="---" disabled>---</option>
+
+                                <option value='Zaakceptowano'>Zaakceptowano</option>
+                                <option value='W trakcie'>W trakcie</option>
+                                <option value='Zakończono'>Zakończono</option>
+                                <option value='Anulowano'>Anulowano</option>
                             </select>
                         </div>
                     )
@@ -318,10 +319,10 @@ function Orders() {
                                     </td>
                                     <td>|</td>
                                     <td>
-                                    <Link to="/orderproducts" className="przyciskFunkcyjny"> Przedmioty </Link>
-                                </td>
+                                        <Link to="/orderproducts" className="przyciskFunkcyjny"> Przedmioty </Link>
+                                    </td>
                                 </tr>
-                                
+
                             </table>
                         </div>
                     )
