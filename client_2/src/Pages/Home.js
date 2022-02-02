@@ -58,7 +58,7 @@ function Home(){
                             <tr> 
                                 <td><Link to="/orders" class="przycisk"> Zamówienia </Link> </td> <td></td>
                             </tr>
-                            <tr> 
+                            {/* <tr> 
                                 <td><Link to="/category" class="przycisk"> Kategorie </Link> </td> <td></td>
                             </tr>
                             <tr> 
@@ -69,16 +69,16 @@ function Home(){
                             </tr>
                             <tr> 
                                 <td><Link to="/position" class="przycisk"> Stanowiska </Link></td> <td></td>
-                            </tr>
+                            </tr> */}
                             <tr> 
                                 <td><Link to="/about" class="przycisk"> O nas </Link> </td> <td></td>
                             </tr>
                             <tr>
                                 <br></br>
                             </tr>
-                            <tr> 
+                            {/* <tr> 
                                 <td></td><td><button  class="przyciskFunkcyjny">&lt;Wyloguj&gt;</button> </td>
-                            </tr>
+                            </tr> */}
                         </table>
                     </div>
                 </div>
