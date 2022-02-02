@@ -191,7 +191,7 @@ function OrderProducts() {
 
 
     useEffect(() => {
-        fetch("http://localhost:3001/produkt/getAll")
+        fetch("http://localhost:3001/zamowienieProdukt/getAll")
             .then(res => res.json())
             .then((result) => {
                 console.log("result")
@@ -217,7 +217,7 @@ function OrderProducts() {
 
         console.log("ID:")
         console.log(id)
-        fetch("http://localhost:3001/produkt/delete", {
+        fetch("http://localhost:3001/produktZamowienie/delete", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id: id }),
@@ -232,11 +232,13 @@ function OrderProducts() {
                 console.log("items")
                 console.log(items)
                 
+                
             })
             .catch((err) => console.log(err))
     
     }
     
+    const [filtered,setFiltered] = useState([])
     
     const data = React.useMemo(() =>
         items,
@@ -251,7 +253,7 @@ function OrderProducts() {
                 accessor: 'id',
             },
             {
-                Header: 'Nazwa',
+                Header: 'Produkt ID',
                 accessor: 'nazwa',
             },
             {
@@ -259,8 +261,8 @@ function OrderProducts() {
                 accessor: 'ilosc',
             },
             {
-                Header: 'Cena',
-                accessor: 'cena',
+                Header: 'Zamowienie ID',
+                accessor: 'zamowienie_id',
             },
             {
                 Header: 'Akcje',
