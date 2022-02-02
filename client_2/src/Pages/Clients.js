@@ -294,7 +294,7 @@ function Clients() {
                                         <Link to="/deleteproduct" className="przycisk"> Usuń </Link> */}
                                     </div>
                                 </td>
-                                {/* <td>
+                                <td>
                                     <div className="nazwaRamka">
                                         <div className="tekstNazwaRamka">Wyszukiwanie</div>
                                         <div className="margines">
@@ -307,7 +307,7 @@ function Clients() {
                                             </table>
                                         </div>
                                     </div>
-                                </td> */}
+                                </td>
                             </tr>
                             </table>
                             <table className="tabela">

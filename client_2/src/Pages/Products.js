@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useTable, useSortBy, useFilters } from "react-table"
 import './Components.css';
-import { BrowserRouter as useNavigate, Link} from "react-router-dom";
+import { BrowserRouter as useNavigate, Link } from "react-router-dom";
 
 
 //do usuniecia
@@ -29,31 +29,31 @@ import { BrowserRouter as useNavigate, Link} from "react-router-dom";
 const textfield = {
     backgroundColor: "#CCCCCC",
     padding: "3px",
-  };
-  const textfieldid = {
+};
+const textfieldid = {
     backgroundColor: "#CCCCCC",
     padding: "3px",
     width: "25px",
     textAlign: "center",
-  };
-  const naglowek = {
-    color: "#000000", 
+};
+const naglowek = {
+    color: "#000000",
     margin: "15px",
     textAlign: "left",
-  };
+};
 
-const UpdateValue = (value)=>{
+const UpdateValue = (value) => {
 
     fetch("http://localhost:3001/produkt/update", {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(value),
-            // mode: 'no-cors'
-        }).then((res) => res.json())
-            .then((data) => {
-                console.log(data)
-            })
-            .catch((err) => console.log(err))
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(value),
+        // mode: 'no-cors'
+    }).then((res) => res.json())
+        .then((data) => {
+            console.log(data)
+        })
+        .catch((err) => console.log(err))
 
 }
 
@@ -63,38 +63,38 @@ const EditableCell = ({
     row: { index },
     column: { id },
     updateMyData, // This is a custom function that we supplied to our table instance
-  }) => {
+}) => {
     // We need to keep and update the state of the cell normally
     const [value, setValue] = React.useState(initialValue)
-  
+
     const onChange = e => {
-      setValue(e.target.value)
+        setValue(e.target.value)
     }
-  
+
     // We'll only update the external data when the input is blurred
     const onBlur = () => {
-      updateMyData(index, id, value)
+        updateMyData(index, id, value)
     }
-  
+
     // If the initialValue is changed external, sync it up with our state
     React.useEffect(() => {
-      setValue(initialValue)
+        setValue(initialValue)
     }, [initialValue])
     console.log(id)
-    if(id == "id"){
-        return  <input style={textfieldid} value={value} disabled/>
+    if (id == "id") {
+        return <input style={textfieldid} value={value} disabled />
     }
-    
-    return <input  style={textfield} value={value} onChange={onChange} onBlur={onBlur} />
-  }
-  
-  // Set our editable cell renderer as the default Cell renderer
-  const defaultColumn = {
+
+    return <input style={textfield} value={value} onChange={onChange} onBlur={onBlur} />
+}
+
+// Set our editable cell renderer as the default Cell renderer
+const defaultColumn = {
     Cell: EditableCell,
-  }
+}
 
 
-function Table({ columns, data, updateMyData, skipPageReset }){
+function Table({ columns, data, updateMyData, skipPageReset }) {
 
 
     // const defaultColumn = React.useMemo(
@@ -113,8 +113,8 @@ function Table({ columns, data, updateMyData, skipPageReset }){
         rows,
         prepareRow,
         getSortByToggleProps,
-    } = useTable({ columns, data, defaultColumn, updateMyData, },useSortBy)
-    console.log( {
+    } = useTable({ columns, data, defaultColumn, updateMyData, }, useSortBy)
+    console.log({
         getTableProps,
         getTableBodyProps,
         headerGroups,
@@ -122,7 +122,7 @@ function Table({ columns, data, updateMyData, skipPageReset }){
         prepareRow,
     })
     return (
-            <table className="tabela"  {...getTableProps()}>
+        <table className="tabela"  {...getTableProps()}>
             <thead >
                 {headerGroups.map(headerGroup => (
                     <tr {...headerGroup.getHeaderGroupProps()}>
@@ -131,7 +131,7 @@ function Table({ columns, data, updateMyData, skipPageReset }){
                                 <span>
                                     {column.isSorted ? (column.isSortedDesc ? ' ▼' : ' ▲') : ''}
                                 </span>
-                                
+
                             </th>
 
                         ))}
@@ -157,37 +157,37 @@ function Table({ columns, data, updateMyData, skipPageReset }){
 function Products() {
 
 
-    
+
     const [error, setError] = useState(null)
     const [isLoaded, setIsLoaded] = useState(false)
     const [items, setItems] = useState([])
     const [reload, setReload] = useState(false)
 
 
-  const [skipPageReset, setSkipPageReset] = React.useState(false)
+    const [skipPageReset, setSkipPageReset] = React.useState(false)
 
     const updateMyData = (rowIndex, columnId, value) => {
         // We also turn on the flag to not reset the page
         setSkipPageReset(true)
         setItems(old =>
-          old.map((row, index) => {
-            if (index === rowIndex) {
+            old.map((row, index) => {
+                if (index === rowIndex) {
 
 
-                let ret = {
-                    ...old[rowIndex],
-                    [columnId]: value,
-                  }
-                
+                    let ret = {
+                        ...old[rowIndex],
+                        [columnId]: value,
+                    }
 
-                UpdateValue(ret)
-                
-              return ret
-            }
-            return row
-          })
+
+                    UpdateValue(ret)
+
+                    return ret
+                }
+                return row
+            })
         )
-      }
+    }
 
 
     useEffect(() => {
@@ -225,19 +225,19 @@ function Products() {
         }).then((res) => res.json())
             .then((data) => {
 
-                setItems(old=>{
-                    return old.filter(o=>{return o.id!=id})
+                setItems(old => {
+                    return old.filter(o => { return o.id != id })
                 })
 
                 console.log("items")
                 console.log(items)
-                
+
             })
             .catch((err) => console.log(err))
-    
+
     }
-    
-    
+
+
     const data = React.useMemo(() =>
         items,
         [items]
@@ -286,23 +286,23 @@ function Products() {
 
     useEffect(() => {
         setSkipPageReset(false)
-      }, [data])
+    }, [data])
 
     //useFilters
     if (error) {
         return <div>Error: {error.message}</div>
     }
     else if (!isLoaded) {
-        return (        
+        return (
             <div class="menuRamka">
-            <div class="nazwaRamka">
-                <div class="tekstNazwaRamka">Error 404</div>
-                <div class="margines">
-                  <div>Loading: ...</div>
+                <div class="nazwaRamka">
+                    <div class="tekstNazwaRamka">Error 404</div>
+                    <div class="margines">
+                        <div>Loading: ...</div>
+                    </div>
                 </div>
             </div>
-          </div>
-            );
+        );
     }
 
     else if (isLoaded) {
@@ -321,7 +321,7 @@ function Products() {
                                         <Link to="/deleteproduct" className="przycisk"> Usuń </Link> */}
                                     </div>
                                 </td>
-                                {/* <td>
+                                <td>
                                     <div className="nazwaRamka">
                                         <div className="tekstNazwaRamka">Wyszukiwanie</div>
                                         <div className="margines">
@@ -334,22 +334,22 @@ function Products() {
                                             </table>
                                         </div>
                                     </div>
-                                </td> */}
+                                </td>
                             </tr>
-                            </table>
-                            <table className="tabela">
+                        </table>
+                        <table className="tabela">
                             <tr>
                                 <td>
                                     <br></br>
                                     <div className="nazwaRamka">
                                         <div className="tekstNazwaRamka">Elementy</div>
                                         <div className="margines">
-                                        <Table 
-                                        columns={columns}
-                                        data={data}
-                                        updateMyData={updateMyData}
-                                        skipPageReset={skipPageReset}
-                                        />
+                                            <Table
+                                                columns={columns}
+                                                data={data}
+                                                updateMyData={updateMyData}
+                                                skipPageReset={skipPageReset}
+                                            />
                                         </div>
                                     </div>
                                 </td>

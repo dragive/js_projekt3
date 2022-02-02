@@ -3,7 +3,7 @@ import { useTable, useSortBy, useFilters } from "react-table"
 import './Components.css';
 import { BrowserRouter as useNavigate, Link } from "react-router-dom";
 
-import {getCurrentDate} from "../Services/CommonServices"
+import { getCurrentDate } from "../Services/CommonServices"
 
 
 
@@ -16,14 +16,14 @@ const textfieldid = {
     padding: "3px",
     width: "25px",
     textAlign: "center",
-    
+
 };
 const textfieldid2 = {
     backgroundColor: "#CCCCCC",
     padding: "3px",
     width: "75px",
     textAlign: "center",
-    
+
 };
 const naglowek = {
     color: "#000000",
@@ -193,7 +193,7 @@ function Orders() {
         )
     }
 
-    function getItemsFromAPI(){
+    function getItemsFromAPI() {
         fetch("http://localhost:3001/zamowienie/getAll")
             .then(res => res.json())
             .then((result) => {
@@ -259,42 +259,42 @@ function Orders() {
         console.log(row.values)
         console.log("row.values.stan ")
         let r = row.values
-        console.log(r.stan )
-        if(r.stan == "Zakończono"){
+        console.log(r.stan)
+        if (r.stan == "Zakończono") {
 
 
-        UpdateValue({
-            id:row.values.id,
-            dataZalozenia: row.values.data_zalozenia,
-            // pracownikId: row.values.pracownik_id,
-            klientId: row.values.klient_id,
-            dataRealizacji: ((row.values.data_realizacji == '' || row.values.data_realizacji ==undefined )? getCurrentDate():row.values.data_realizacji),
-            stan: row.values.stan
-        })
-        getItemsFromAPI()
-        
+            UpdateValue({
+                id: row.values.id,
+                dataZalozenia: row.values.data_zalozenia,
+                // pracownikId: row.values.pracownik_id,
+                klientId: row.values.klient_id,
+                dataRealizacji: ((row.values.data_realizacji == '' || row.values.data_realizacji == undefined) ? getCurrentDate() : row.values.data_realizacji),
+                stan: row.values.stan
+            })
+            getItemsFromAPI()
+
         }
-        else{
+        else {
 
-        UpdateValue({
-            id: row.values.id,
-            dataZalozenia: row.values.data_zalozenia,
-            // pracownikId: row.values.pracownik_id,
-            klientId: row.values.klient_id,
-            dataRealizacji: row.values.data_realizacji,
-            stan: row.values.stan
-        })
+            UpdateValue({
+                id: row.values.id,
+                dataZalozenia: row.values.data_zalozenia,
+                // pracownikId: row.values.pracownik_id,
+                klientId: row.values.klient_id,
+                dataRealizacji: row.values.data_realizacji,
+                stan: row.values.stan
+            })
 
-        getItemsFromAPI()
+            getItemsFromAPI()
         }
-    
+
     }
 
     function changeSelectClient(o, row) {
         console.log("o.target.value")
         console.log(o.target.value)
         // row.values.klient_id = o.target.value
-        
+
         UpdateValue({
             id: row.values.id,
             dataZalozenia: row.values.data_zalozenia,
@@ -303,16 +303,16 @@ function Orders() {
             dataRealizacji: row.values.data_realizacji,
             stan: row.values.stan
         })
-        
+
         // getItemsFromAPI()
-    
+
     }
 
-    const [klienci,setKlienci] = useState([])
+    const [klienci, setKlienci] = useState([])
 
-    useEffect(getKlientsData,[items])
+    useEffect(getKlientsData, [items])
 
-    function getKlientsData(){
+    function getKlientsData() {
         fetch("http://localhost:3001/klient/getAll", {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' },
@@ -321,7 +321,7 @@ function Orders() {
             .then((data) => {
 
                 setKlienci(data.data)
-            
+
 
                 console.log("klienci")
                 console.log(klienci)
@@ -330,10 +330,9 @@ function Orders() {
             .catch((err) => console.log(err))
     }
 
-    function getKlientById(id){
-        for(let i =0;i<klienci.length;i++){
-            if(klienci[i].id == id)
-            {
+    function getKlientById(id) {
+        for (let i = 0; i < klienci.length; i++) {
+            if (klienci[i].id == id) {
                 return klienci[i]
             }
         }
@@ -360,18 +359,18 @@ function Orders() {
             },
             {
                 Header: 'Dane Klienta',
-                Cell:(props)=>{
-                    
+                Cell: (props) => {
+
                     let kk = getKlientById(props.row.values.klient_id)
                     let arr = []
-                    for(let i =0;i<klienci.length;i++){
+                    for (let i = 0; i < klienci.length; i++) {
                         let element = klienci[i]
                         arr.push((<option value={element.id}>{element.nazwa_firmy} {element.nip}</option>))
-                    
+
                     }
                     console.log("klienci1")
                     console.log(klienci)
-                    if(kk == undefined){
+                    if (kk == undefined) {
                         return (<div >
                             <select style={textfield} onChange={(e) => { changeSelectClient(e, props.row) }}>
 
@@ -465,16 +464,16 @@ function Orders() {
         return <div>Error: {error.message}</div>
     }
     else if (!isLoaded) {
-        return (        
+        return (
             <div class="menuRamka">
-            <div class="nazwaRamka">
-                <div class="tekstNazwaRamka">Error 404</div>
-                <div class="margines">
-                  <div>Loading: ...</div>
+                <div class="nazwaRamka">
+                    <div class="tekstNazwaRamka">Error 404</div>
+                    <div class="margines">
+                        <div>Loading: ...</div>
+                    </div>
                 </div>
             </div>
-          </div>
-            );
+        );
     }
 
     else if (isLoaded) {
@@ -493,7 +492,7 @@ function Orders() {
                                         <Link to="/deleteproduct" className="przycisk"> Usuń </Link> */}
                                     </div>
                                 </td>
-                                {/* <td>
+                                <td>
                                     <div className="nazwaRamka">
                                         <div className="tekstNazwaRamka">Wyszukiwanie</div>
                                         <div className="margines">
@@ -506,7 +505,7 @@ function Orders() {
                                             </table>
                                         </div>
                                     </div>
-                                </td> */}
+                                </td>
                             </tr>
                         </table>
                         <table className="tabela">
