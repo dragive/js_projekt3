@@ -465,7 +465,16 @@ function Orders() {
         return <div>Error: {error.message}</div>
     }
     else if (!isLoaded) {
-        return <div>Loading: ...</div>
+        return (        
+            <div class="menuRamka">
+            <div class="nazwaRamka">
+                <div class="tekstNazwaRamka">Error 404</div>
+                <div class="margines">
+                  <div>Loading: ...</div>
+                </div>
+            </div>
+          </div>
+            );
     }
 
     else if (isLoaded) {

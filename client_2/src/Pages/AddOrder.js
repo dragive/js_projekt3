@@ -90,7 +90,7 @@ function AddProduct(){
                                 <br></br>
                             </tr> */}
                             <tr>
-                                <td>Dane Klienta: </td> 
+                                <td>Dane Klienta: &nbsp; &nbsp; &nbsp; </td> 
                                 <td> 
                                 <select style={textfield} onChange={(e) => { setKlientId(e.target.value);  }}>
                                     {arr}
