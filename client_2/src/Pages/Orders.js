@@ -70,6 +70,9 @@ const EditableCell = ({
     if (id == "id") {
         return <input style={textfieldid} value={value} disabled />
     }
+    if (id == "klient_id") {
+        return <input style={textfieldid} value={value} disabled />
+    }
 
     return <input style={textfield} value={value} onChange={onChange} onBlur={onBlur} />
 }
@@ -170,7 +173,7 @@ function Orders() {
                     UpdateValue({
                         id: ret.id,
                         dataZalozenia: ret.data_zalozenia,
-                        pracownikId: ret.pracownik_id,
+                        // pracownikId: ret.pracownik_id,
                         klientId: ret.klient_id,
                         dataRealizacji: ret.data_realizacji,
                         stan: ret.stan
@@ -256,9 +259,9 @@ function Orders() {
         UpdateValue({
             id:row.values.id,
             dataZalozenia: row.values.data_zalozenia,
-            pracownikId: row.values.pracownik_id,
+            // pracownikId: row.values.pracownik_id,
             klientId: row.values.klient_id,
-            dataRealizacji: ((row.values.data_realizacji == '')? getCurrentDate():row.values.dataRealizacji),
+            dataRealizacji: ((row.values.data_realizacji == '' || row.values.data_realizacji ==undefined )? getCurrentDate():row.values.dataRealizacji),
             stan: row.values.stan
         })
         getItemsFromAPI()
@@ -269,13 +272,64 @@ function Orders() {
         UpdateValue({
             id: row.values.id,
             dataZalozenia: row.values.data_zalozenia,
-            pracownikId: row.values.pracownik_id,
+            // pracownikId: row.values.pracownik_id,
             klientId: row.values.klient_id,
             dataRealizacji: row.values.data_realizacji,
             stan: row.values.stan
         })
+
+        getItemsFromAPI()
         }
     
+    }
+
+    function changeSelectClient(o, row) {
+        console.log("o.target.value")
+        console.log(o.target.value)
+        row.values.klient_id = o.target.value
+        
+        UpdateValue({
+            id: row.values.id,
+            dataZalozenia: row.values.data_zalozenia,
+            // pracownikId: row.values.pracownik_id,
+            klientId: row.values.klient_id,
+            dataRealizacji: row.values.data_realizacji,
+            stan: row.values.stan
+        })
+        
+        getItemsFromAPI()
+    
+    }
+
+    const [klienci,setKlienci] = useState([])
+
+    useEffect(getKlientsData,[])
+
+    function getKlientsData(){
+        fetch("http://localhost:3001/klient/getAll", {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' },
+            // mode: 'no-cors'
+        }).then((res) => res.json())
+            .then((data) => {
+
+                setKlienci(data.data)
+            
+
+                console.log("klienci")
+                console.log(klienci)
+
+            })
+            .catch((err) => console.log(err))
+    }
+
+    function getKlientById(id){
+        for(let i =0;i<klienci.length;i++){
+            if(klienci[i].id == id)
+            {
+                return klienci[i]
+            }
+        }
     }
 
     const columns = React.useMemo(
@@ -289,13 +343,50 @@ function Orders() {
                 Header: 'Data złożenia',
                 accessor: 'data_zalozenia',
             },
-            {
-                Header: 'Id pracownika',
-                accessor: 'pracownik_id',
-            },
+            // {
+            //     Header: 'Id pracownika',
+            //     accessor: 'pracownik_id',
+            // },
             {
                 Header: 'Id klienta',
                 accessor: 'klient_id',
+            },
+            {
+                Header: 'Dane Klienta',
+                Cell:(props)=>{
+                    
+                    let kk = getKlientById(props.row.values.klient_id)
+                    let arr = []
+                    for(let i =0;i<klienci.length;i++){
+                        let element = klienci[i]
+                        arr.push((<option value={element.id}>{element.nazwa_firmy} {element.nip}</option>))
+                    
+                    }
+                    console.log("klienci1")
+                    console.log(klienci)
+                    if(kk == undefined){
+                        return (<div >
+                            <select style={textfield} onChange={(e) => { changeSelectClient(e, props.row) }}>
+
+                                <option value="---" disabled>---</option>
+
+                                {arr}
+                            </select>
+                        </div>)
+                    }
+                    return (
+                        <div >
+                            <select style={textfield} onChange={(e) => { changeSelectClient(e, props.row) }}>
+
+                                <option value={props.row.values.klient_id}>{kk.nazwa_firmy} {kk.nip}</option>
+
+                                <option value="---" disabled>---</option>
+
+                                {arr}
+                            </select>
+                        </div>
+                    )
+                }
             },
             {
                 Header: 'Data realizacji',
@@ -355,7 +446,7 @@ function Orders() {
                 }
             },
             ],
-        []
+        [klienci]
     )
 
     useEffect(() => {

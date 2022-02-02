@@ -6,13 +6,13 @@ function AddProduct(){
 
     function AddToDB(e){
         e.preventDefault();
-        console.log({pracownikId,klientId})
+        console.log({klientId})
 
 
         fetch("http://localhost:3001/zamowienie/add", {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({pracownikId:parseInt(pracownikId),klientId:parseInt(klientId),stan:"'Zaakceptowane'",dataZalozenia:getCurrentDate(),dataRealizacji:""}),
+            body: JSON.stringify({pracownikId:1,klientId:parseInt(klientId),stan:"'Zaakceptowane'",dataZalozenia:getCurrentDate(),dataRealizacji:""}),
             // mode: 'no-cors'
         }).then((res) => res.json())
             .then((data) => {
@@ -24,7 +24,7 @@ function AddProduct(){
 
     }
 
-    const [pracownikId,setPracownikId] = useState(0)
+    // const [pracownikId,setPracownikId] = useState(0)
     const [klientId,setKlientId] = useState(0)
 
     return(
@@ -34,12 +34,12 @@ function AddProduct(){
                     <div class="margines">
                     <form onSubmit={AddToDB}>
                     <table class="tabela">
-                            <tr>
+                            {/* <tr>
                                 <td>Pracownik ID: </td> <td> <input class="poleDoWpisywaniaProdukty" type="text" onInput={e=> setPracownikId(e.target.value)}  name="productname" id="name"/></td>
                             </tr>
                             <tr>
                                 <br></br>
-                            </tr>
+                            </tr> */}
                             <tr>
                                 <td>Klient ID: </td> <td> <input class="poleDoWpisywaniaProdukty" type="text" onInput={e=> setKlientId(e.target.value)} name="productprice" id="price"/></td>
                             </tr>
