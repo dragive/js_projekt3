@@ -49,7 +49,9 @@ const EditableCell = ({
     const [value, setValue] = React.useState(initialValue)
 
     const onChange = e => {
-        setValue(e.target.value)
+        let temp = e.target.value
+        
+        setValue(temp)
     }
 
     // We'll only update the external data when the input is blurred
@@ -162,7 +164,14 @@ function Orders() {
                     }
 
 
-                    UpdateValue(ret)
+                    UpdateValue({
+                        id:ret.id,
+                        dataZalozenia: ret.data_zalozenia,
+                        pracownikId: ret.pracownik_id,
+                        klientId: ret.klient_id,
+                        dataRealizacji: ret.data_realizacji,
+                        stan: ret.stan
+                    })
 
                     return ret
                 }
