@@ -18,6 +18,13 @@ const textfieldid = {
     textAlign: "center",
     
 };
+const textfieldid2 = {
+    backgroundColor: "#CCCCCC",
+    padding: "3px",
+    width: "75px",
+    textAlign: "center",
+    
+};
 const naglowek = {
     color: "#000000",
     margin: "15px",
@@ -71,7 +78,7 @@ const EditableCell = ({
         return <input style={textfieldid} value={value} disabled />
     }
     if (id == "klient_id") {
-        return <input style={textfieldid} value={value} disabled />
+        return <input style={textfieldid2} value={value} disabled />
     }
 
     return <input style={textfield} value={value} onChange={onChange} onBlur={onBlur} />
@@ -477,7 +484,7 @@ function Orders() {
                                         <Link to="/deleteproduct" className="przycisk"> Usuń </Link> */}
                                     </div>
                                 </td>
-                                <td>
+                                {/* <td>
                                     <div className="nazwaRamka">
                                         <div className="tekstNazwaRamka">Wyszukiwanie</div>
                                         <div className="margines">
@@ -490,7 +497,7 @@ function Orders() {
                                             </table>
                                         </div>
                                     </div>
-                                </td>
+                                </td> */}
                             </tr>
                         </table>
                         <table className="tabela">

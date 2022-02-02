@@ -2,6 +2,12 @@ import React, { useState, useEffect } from "react";
 import './Components.css';
 import { BrowserRouter as useNavigate, Link  } from "react-router-dom";
 import {getCurrentDate} from "../Services/CommonServices"
+
+const textfield = {
+    backgroundColor: "#CCCCCC",
+    padding: "3px",
+};
+
 function AddProduct(){
 
     function AddToDB(e){
@@ -65,7 +71,7 @@ function AddProduct(){
     
     }
     return(
-            <div class="popupramka">
+            <div class="menuRamka">
                 <div class="nazwaRamka">
                     <div class="tekstNazwaRamka">Dodaj nowe zamówienie</div>
                     <div class="margines">
@@ -86,7 +92,7 @@ function AddProduct(){
                             <tr>
                                 <td>Dane Klienta: </td> 
                                 <td> 
-                                <select onChange={(e) => { setKlientId(e.target.value);  }}>
+                                <select style={textfield} onChange={(e) => { setKlientId(e.target.value);  }}>
                                     {arr}
                                 </select>
                                 </td>

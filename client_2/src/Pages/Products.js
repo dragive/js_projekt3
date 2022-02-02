@@ -312,7 +312,7 @@ function Products() {
                                         <Link to="/deleteproduct" className="przycisk"> Usuń </Link> */}
                                     </div>
                                 </td>
-                                <td>
+                                {/* <td>
                                     <div className="nazwaRamka">
                                         <div className="tekstNazwaRamka">Wyszukiwanie</div>
                                         <div className="margines">
@@ -325,7 +325,7 @@ function Products() {
                                             </table>
                                         </div>
                                     </div>
-                                </td>
+                                </td> */}
                             </tr>
                             </table>
                             <table className="tabela">
