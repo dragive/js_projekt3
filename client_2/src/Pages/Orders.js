@@ -92,16 +92,6 @@ const defaultColumn = {
 
 function Table({ columns, data, updateMyData, skipPageReset }) {
 
-
-    // const defaultColumn = React.useMemo(
-    //     () => ({
-    //         Filter: TextFilter,
-    //     }),
-    //     []
-    // )
-
-    console.log("useTable")
-
     const {
         getTableProps,
         getTableBodyProps,
@@ -110,13 +100,7 @@ function Table({ columns, data, updateMyData, skipPageReset }) {
         prepareRow,
         getSortByToggleProps,
     } = useTable({ columns, data, defaultColumn, updateMyData, }, useSortBy)
-    console.log({
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        rows,
-        prepareRow,
-    })
+    
     return (
         <table className="tabela"  {...getTableProps()}>
             <thead >
@@ -299,13 +283,13 @@ function Orders() {
             id: row.values.id,
             dataZalozenia: row.values.data_zalozenia,
             // pracownikId: row.values.pracownik_id,
-            klientId: row.values.klient_id,
+            klientId: o.target.value,
             dataRealizacji: row.values.data_realizacji,
             stan: row.values.stan
         })
-
-        // getItemsFromAPI()
-
+        //mozliwe problemy
+        getItemsFromAPI()
+    
     }
 
     const [klienci, setKlienci] = useState([])
