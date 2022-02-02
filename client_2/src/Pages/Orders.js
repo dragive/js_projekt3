@@ -318,7 +318,7 @@ function Orders() {
                                     </td>
                                     <td>|</td>
                                     <td>
-                                    <Link to="/orderproducts" className="przyciskFunkcyjny"> Szczegóły </Link>
+                                    <Link to="/orderproducts" className="przyciskFunkcyjny"> Przedmioty </Link>
                                 </td>
                                 </tr>
                                 
