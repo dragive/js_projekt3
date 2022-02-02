@@ -261,7 +261,7 @@ function Orders() {
             dataZalozenia: row.values.data_zalozenia,
             // pracownikId: row.values.pracownik_id,
             klientId: row.values.klient_id,
-            dataRealizacji: ((row.values.data_realizacji == '' || row.values.data_realizacji ==undefined )? getCurrentDate():row.values.dataRealizacji),
+            dataRealizacji: ((row.values.data_realizacji == '' || row.values.data_realizacji ==undefined )? getCurrentDate():row.values.data_realizacji),
             stan: row.values.stan
         })
         getItemsFromAPI()
@@ -286,7 +286,7 @@ function Orders() {
     function changeSelectClient(o, row) {
         console.log("o.target.value")
         console.log(o.target.value)
-        row.values.klient_id = o.target.value
+        // row.values.klient_id = o.target.value
         
         UpdateValue({
             id: row.values.id,
@@ -297,13 +297,13 @@ function Orders() {
             stan: row.values.stan
         })
         
-        getItemsFromAPI()
+        // getItemsFromAPI()
     
     }
 
     const [klienci,setKlienci] = useState([])
 
-    useEffect(getKlientsData,[])
+    useEffect(getKlientsData,[items])
 
     function getKlientsData(){
         fetch("http://localhost:3001/klient/getAll", {

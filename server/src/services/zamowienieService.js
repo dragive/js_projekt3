@@ -19,8 +19,8 @@ function getMultiple(page=1,perPage = config.listPerPage){
 function insert(ob){
        
     try{
-        console.log(`query: insert into Zamowienie (data_zalozenia,pracownik_id,klient_id,data_realizacji,stan) values ('${ob.dataZalozenia}',${ob.pracownikId},${ob.klientId},'${ob.dataRealizacji}',${ob.stan});`)
-        db.queryNoResult(`insert into Zamowienie (data_zalozenia,pracownik_id,klient_id,data_realizacji,stan) values ('${ob.dataZalozenia}',${ob.pracownikId},${ob.klientId},'${ob.dataRealizacji}',${ob.stan});`)
+        console.log(`query: insert into Zamowienie (data_zalozenia,pracownik_id,klient_id,data_realizacji,stan) values ('${ob.dataZalozenia}',${ob.pracownikId},${ob.klientId},'${ob.dataRealizacji}','${ob.stan}');`)
+        db.queryNoResult(`insert into Zamowienie (data_zalozenia,pracownik_id,klient_id,data_realizacji,stan) values ('${ob.dataZalozenia}',${ob.pracownikId},${ob.klientId},'${ob.dataRealizacji}','${ob.stan}');`)
     }
     catch(err){
         console.error("Błąd przy insercie",err)
